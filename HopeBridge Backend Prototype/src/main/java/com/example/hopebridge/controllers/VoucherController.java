@@ -1,0 +1,21 @@
+package com.example.hopebridge.controllers;
+import com.example.hopebridge.entities.Voucher;
+import com.example.hopebridge.services.VoucherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/vouchers")
+public class VoucherController {
+    @Autowired
+    private VoucherService voucherService;
+
+    @PostMapping("/create")
+    public ResponseEntity<Voucher> create(@RequestBody Voucher voucher) {
+        return ResponseEntity.ok(voucherService.createVoucher(voucher));
+    }
+}
