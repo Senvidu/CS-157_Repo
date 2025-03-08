@@ -3,6 +3,7 @@ package com.example.hopebridge.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Builder
 @Entity
 @Getter
 @Setter
@@ -19,4 +20,5 @@ public class Donation {
     @ManyToOne
     @JoinColumn(name = "donor_id")
     private User donor;
+
 }
