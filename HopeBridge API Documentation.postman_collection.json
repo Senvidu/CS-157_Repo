@@ -1,0 +1,641 @@
+{
+	"info": {
+		"_postman_id": "edd95d24-098a-4b2e-ad81-c2ec0f08d970",
+		"name": "HopeBridge API Documentation",
+		"description": "## HopeBridge - Backend API Documentation\n\n### Description:\n\n- The HopeBridge system is a backend application designed to facilitate a transparent and secure charity donation platform. It is built using Spring Boot for the backend, MySQL for the database, and JWT authentication for secure user sessions. This API documentation outlines the available endpoints and their functionalities, allowing users to interact with the system efficiently.\n    \n\n### **Features**\n\nThe HopeBridge system offers the following features:\n\n- User Management: Allows users to register, login, and manage their profiles using JWT authentication.\n    \n- Donation Management: Enables users to make, track, and manage their donations securely.\n    \n- Employment Platform: Facilitates job listings and applications, connecting beneficiaries with employment opportunities.\n    \n- E-Voucher System: Issues and manages e-vouchers for purchases in partnered supermarkets to ensure transparency and prevent fraud.\n    \n- Supermarket Profit Tracking: Provides insights into purchases made using e-vouchers and tracks profit margins for partnered supermarkets.\n    \n- Biometric Authentication: Allows villagers without smartphones to authenticate via Grama Niladhari officials.\n    \n- Product Verification: Ensures that only eligible products can be purchased using the issued e-vouchers.\n    \n- Data Validation: Implements Hibernate Validator for request body validation to maintain data integrity.\n    \n- Error Handling: Ensures robust error handling with meaningful error responses across all endpoints.\n    \n\n### Setup Instructions:\n\nTo run the HopeBridge system, follow these steps:\n\n- Install dependencies using mvn clean install.\n    \n- Configure the database by updating credentials in application.properties.\n    \n- Run database migrations automatically handled by Hibernate.\n    \n- Start the server using mvn spring-boot:run. The server will run at [http://localhost:8080](http://localhost:8080).\n    \n\n### API Endpoints:\n\n### The API endpoints are categorized based on their functionalities:\n\n- User Management: Register, login, and manage user profiles.\n    \n- Donation Management: Make, track, and manage donations securely.\n    \n- Employment Platform: Create job postings and allow users to apply for jobs.\n    \n- E-Voucher System: Issue and redeem e-vouchers for purchases.\n    \n- Supermarket Profit Tracking: Generate reports on purchases and profit margins.\n    \n- Product Verification: Validate purchased items against eligibility criteria.\n    \n- Data Validation and Error Handling:  \n    Request bodies are validated using Hibernate Validator to ensure data integrity. The API endpoints are designed to handle errors gracefully and provide meaningful error responses.\n    \n\n### Contributing:\n\n- Contributions to HopeBridge are welcome! If you encounter bugs or have suggestions for improvement, please open an issue or submit a pull request.\n    \n\n### License:\n\n- HopeBridge is open-source software licensed under the MIT License.\n    \n\n### Conclusion:\n\n- This API documentation provides an overview of the HopeBridge system, its features, setup instructions, available endpoints, advanced reporting capabilities, data validation, error handling, and guidelines for contributing. The system ensures a secure, transparent, and efficient way to manage charity donations, employment opportunities, e-vouchers, and supermarket profit tracking.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40291231"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User (AuthController)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"thisul\",\n  \"password\": \"gghjjyufh\",\n  \"role\": \"USER\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9090/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Registers a new user via AuthController. The password is automatically encoded."
+					},
+					"response": []
+				},
+				{
+					"name": "Login User (AuthController)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"omikariyon\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Logs in a user via AuthController and returns a JWT token."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder’s about user authentication. It’s got the endpoints for signing up and logging in. When a new user registers, their password gets encrypted and stored securely. Logging in? It checks the credentials and hands back a JWT token so they can access the API safely"
+		},
+		{
+			"name": "Biometrics",
+			"item": [
+				{
+					"name": "Register Biometric (BiometricController)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 1,\n  \"fingerprintHash\": \"sampleFingerprintHash\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/biometrics/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"biometrics",
+								"register"
+							]
+						},
+						"description": "Registers biometric data for a user via BiometricController."
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Biometric (BiometricController)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 1,\n  \"fingerprintHash\": \"sampleFingerprintHash\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/biometrics/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"biometrics",
+								"verify"
+							]
+						},
+						"description": "Verifies a user's biometric data via BiometricController."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder handles all things biometrics. It’s got endpoints for registering and verifying biometric data, like fingerprint hashes. Users can save their unique biometric info and use it to authenticate later, adding an extra layer of security to the system"
+		},
+		{
+			"name": "Donations",
+			"item": [
+				{
+					"name": "Make Donation (DonationController)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXd1c2VyMiIsImlhdCI6MTc0MTI3Mjg0MCwiZXhwIjoxNzQxMjc2NDQwfQ.TBgQtsZpyh0rUp7ISIN6Oy8kIajUlyIoF-9f34huwhQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 50.0,\n  \"message\": \"Hope for all\"\n  \n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/donations/oneTime",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"donations",
+								"oneTime"
+							]
+						},
+						"description": "Makes a donation via DonationController."
+					},
+					"response": []
+				},
+				{
+					"name": "List Donations (DonationController)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/donations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"donations"
+							]
+						},
+						"description": "Lists all donations via DonationController."
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXd1c2VyMiIsImlhdCI6MTc0MTI3Mjg0MCwiZXhwIjoxNzQxMjc2NDQwfQ.TBgQtsZpyh0rUp7ISIN6Oy8kIajUlyIoF-9f34huwhQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/donations/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"donations",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscription Donation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXd1c2VyMiIsImlhdCI6MTc0MTI3Mjg0MCwiZXhwIjoxNzQxMjc2NDQwfQ.TBgQtsZpyh0rUp7ISIN6Oy8kIajUlyIoF-9f34huwhQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 50.0,\n  \"message\": \"Hope for all\",\n  \"noOfMonths\":3\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/donations/subscription",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"donations",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This folder has endpoints for managing donations. Users can make donations by providing an amount and a message, which are then processed and recorded by the system. Additionally, there is an endpoint to list all donations, which aids in maintaining transparency and accountability in the donation process."
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "Post Job (JobController)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Software Developer\",\n  \"description\": \"Develop software applications\",\n  \"location\": \"Colombo\",\n  \"salary\": 75000,\n  \"employer\": { \"id\": 2 }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/jobs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"jobs"
+							]
+						},
+						"description": "Creates a new job posting via JobController."
+					},
+					"response": []
+				},
+				{
+					"name": "List Jobs (JobController)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/jobs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"jobs"
+							]
+						},
+						"description": "Retrieves all job postings via JobController."
+					},
+					"response": []
+				}
+			],
+			"description": "The Jobs folder Has endpoints related to job postings and retrieval. Employers can post new job listings, including details like job title, description, location, and salary. There is also an endpoint for listing all jobs, allowing users to browse available employment opportunities within the system."
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Place Order (OrderController)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user\": { \"id\": 1 },\n  \"product\": { \"id\": 2 },\n  \"usedVoucher\": false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/shop/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"shop",
+								"order"
+							]
+						},
+						"description": "Places an order via OrderController."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders by User (OrderController)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/shop/orders/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"shop",
+								"orders",
+								"1"
+							]
+						},
+						"description": "Retrieves orders for a specified user via OrderController."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder contains endpoints that manage the ordering process. Users can place orders by selecting products and optionally using vouchers, and the system records these orders. Additionally, there is an endpoint to retrieve orders by user ID, making it easy for users to view their order history and track the status of their orders."
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get All Products (ProductController)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/shop/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"shop",
+								"products"
+							]
+						},
+						"description": "Retrieves all products via ProductController."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Eligible Products (ProductController)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/shop/products/eligible",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"shop",
+								"products",
+								"eligible"
+							]
+						},
+						"description": "Retrieves products eligible for vouchers via ProductController."
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product (ProductController)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"New Product\",\n  \"price\": 100.0,\n  \"eligibleForVoucher\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/shop/addProducts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"shop",
+								"addProducts"
+							]
+						},
+						"description": "Adds a new product via ProductController using AddProductRequest."
+					},
+					"response": []
+				}
+			],
+			"description": "In the Products folder, endpoints are provided for managing the product catalog. Users can retrieve a complete list of products, filter for those eligible for vouchers, and add new products to the catalog. These endpoints support the overall product management and inventory system within the application."
+		},
+		{
+			"name": "Product Verification",
+			"item": [
+				{
+					"name": "Verify Product (ProductVerificationController)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/products/verify/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"products",
+								"verify",
+								"1"
+							]
+						},
+						"description": "Verifies if a product exists via ProductVerificationController."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder includes an endpoint dedicated to verifying whether a specific product exists in the system. This verification step is crucial for ensuring that only valid and available products are processed, thereby maintaining the integrity of product-related operations."
+		},
+		{
+			"name": "Supermarkets",
+			"item": [
+				{
+					"name": "Get Supermarket Profit (SupermarketProfitController)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/supermarkets/1/profit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"supermarkets",
+								"1",
+								"profit"
+							]
+						},
+						"description": "Calculates and retrieves the profit for a given supermarket via SupermarketProfitController."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder focuses on endpoints that deal with supermarket operations. It includes an endpoint that calculates and retrieves the profit for a given supermarket based on transaction data. This information is useful for financial analysis and helps in understanding the performance of different supermarket partners."
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register User (UserController)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"exampleUser\",\n  \"password\": \"password123\",\n  \"role\": \"USER\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						},
+						"description": "Registers a new user via UserController."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder is specifically for user management outside the authentication process. It includes endpoints for registering users via alternative controllers, ensuring that user information is consistently captured and maintained. This helps in managing user profiles and roles within the system."
+		},
+		{
+			"name": "Vouchers",
+			"item": [
+				{
+					"name": "Create Voucher (VoucherController)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"ABC123\",\n  \"amount\": 20.0,\n  \"redeemed\": false,\n  \"user\": { \"id\": 1 }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/vouchers/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"vouchers",
+								"create"
+							]
+						},
+						"description": "Creates a new voucher via VoucherController."
+					},
+					"response": []
+				}
+			],
+			"description": "This Folder has endpoints for voucher management. It provides an endpoint to create new vouchers, which are typically used to convert donations into redeemable credits. These vouchers allow users to redeem products while ensuring that donated funds are used as intended."
+		},
+		{
+			"name": "Base URL",
+			"item": [
+				{
+					"name": "Base Endpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								""
+							]
+						},
+						"description": "The base endpoint for the HopeBridge API. When hit, it confirms that the application is running."
+					},
+					"response": []
+				}
+			],
+			"description": "Finally, the Base URL folder includes the root endpoint of the API. This simple endpoint serves as a health check to confirm that the application is running and accessible. It forms the foundation of the API, indicating that the system is ready to handle more specific requests.\n\nEach folder in this collection is organized to reflect the modular structure of your backend, ensuring clarity and ease of navigation when testing the API endpoints in Postman."
+		}
+	]
+}
