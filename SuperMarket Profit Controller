@@ -1,0 +1,20 @@
+package com.example.hopebridge.controllers;
+
+import com.example.hopebridge.services.SupermarketProfitService;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/supermarkets")
+public class SupermarketProfitController {
+
+    private final SupermarketProfitService supermarketProfitService;
+
+    public SupermarketProfitController(SupermarketProfitService supermarketProfitService) {
+        this.supermarketProfitService = supermarketProfitService;
+    }
+
+    @GetMapping("/{supermarketId}/profit")
+    public double getSupermarketProfit(@PathVariable Long supermarketId) {
+        return supermarketProfitService.calculateProfit(supermarketId);
+    }
+}
