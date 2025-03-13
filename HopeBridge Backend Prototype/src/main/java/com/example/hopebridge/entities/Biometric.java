@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+//Biometric class takes biometric data on recipients who dont have phones
 public class Biometric {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
