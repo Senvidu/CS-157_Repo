@@ -33,7 +33,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
 
+        System.out.println("Incoming request: " + request.getRequestURI());
+
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            System.out.println("No JWT token found, skipping authentication for: " + request.getRequestURI());
+
             chain.doFilter(request, response);
             return;
         }

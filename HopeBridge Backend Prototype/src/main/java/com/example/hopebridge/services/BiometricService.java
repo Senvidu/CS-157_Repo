@@ -4,6 +4,7 @@ import com.example.hopebridge.entities.Biometric;
 import com.example.hopebridge.entities.User;
 import com.example.hopebridge.repos.BiometricRepository;
 import com.example.hopebridge.repos.UserRepository;
+import com.example.hopebridge.requests.BiometricRegisterRequest;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -18,12 +19,12 @@ public class BiometricService {
         this.userRepository = userRepository;
     }
 
-    public String registerBiometric(Long userId, String fingerprintHash) {
-        Optional<User> user = userRepository.findById(userId);
+    public String registerBiometric(BiometricRegisterRequest request) {
+        Optional<User> user = userRepository.findById(Long.valueOf(request.getUserId()));
         if (user.isPresent()) {
             Biometric biometric = new Biometric();
             biometric.setUser(user.get());
-            biometric.setFingerprintHash(fingerprintHash);
+            biometric.setFingerprintHash(request.getFingerprintHash());
             biometricRepository.save(biometric);
             return "Biometric data registered successfully!";
         }

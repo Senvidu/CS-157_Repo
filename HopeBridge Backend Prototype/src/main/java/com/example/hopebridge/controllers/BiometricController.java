@@ -1,10 +1,11 @@
 package com.example.hopebridge.controllers;
 
+import com.example.hopebridge.requests.BiometricRegisterRequest;
 import com.example.hopebridge.services.BiometricService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/biometrics")
+@RequestMapping("/biometric")
 public class BiometricController {
 
     private final BiometricService biometricService;
@@ -14,8 +15,8 @@ public class BiometricController {
     }
 
     @PostMapping("/register")
-    public String registerBiometric(@RequestParam Long userId, @RequestParam String fingerprintHash) {
-        return biometricService.registerBiometric(userId, fingerprintHash);
+    public String registerBiometric(@RequestBody BiometricRegisterRequest request) {
+        return biometricService.registerBiometric(request);
     }
 
     @PostMapping("/verify")
