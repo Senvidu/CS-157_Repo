@@ -2218,6 +2218,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Ability to do gardening', 'Creativity', 'Basic skills'],
         'category': 'Hospitality',
       },
+      {
+        'title': 'Construction Worker',
+        'company': 'BuildRight Constructions',
+        'location': 'Gampaha',
+        'salary': 'LKR 40,000 - 50,000',
+        'description': 'Assist in building construction and site maintenance.',
+        'requirements': ['Physical strength', 'Ability to follow instructions', 'Basic tool handling'],
+        'category': 'Labor',
+      },
     ];
 
     return Scaffold(
