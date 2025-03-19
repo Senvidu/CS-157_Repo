@@ -2227,6 +2227,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Physical strength', 'Ability to follow instructions', 'Basic tool handling'],
         'category': 'Labor',
       },
+      {
+        'title': 'Warehouse Assistant',
+        'company': 'FastCargo Logistics',
+        'location': 'Kandy',
+        'salary': 'LKR 35,000 - 45,000',
+        'description': 'Loading, unloading, and organizing goods in a warehouse.',
+        'requirements': ['Basic lifting skills', 'Time management', 'Teamwork'],
+        'category': 'Logistics',
+      },
     ];
 
     return Scaffold(
