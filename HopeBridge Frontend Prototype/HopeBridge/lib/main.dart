@@ -2272,6 +2272,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Basic communication skills', 'Alertness', 'Ability to follow instructions'],
         'category': 'Security',
       },
+      {
+        'title': 'Street Vendor',
+        'company': 'Self-Employed',
+        'location': 'Colombo',
+        'salary': 'LKR 25,000 - 35,000',
+        'description': 'Sell fruits, vegetables, or goods in public areas.',
+        'requirements': ['Basic math skills', 'Customer service', 'Ability to stand for long hours'],
+        'category': 'Retail',
+      },
     ];
 
     return Scaffold(
