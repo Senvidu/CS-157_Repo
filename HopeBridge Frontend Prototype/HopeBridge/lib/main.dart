@@ -2245,6 +2245,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Attention to detail', 'Ability to use cleaning equipment', 'Punctuality'],
         'category': 'Cleaning',
       },
+      {
+        'title': 'Fisherman',
+        'company': 'OceanCatch Fisheries',
+        'location': 'Negombo',
+        'salary': 'LKR 40,000 - 55,000',
+        'description': 'Catch fish and assist in boat operations.',
+        'requirements': ['Basic swimming skills', 'Ability to work long hours', 'Teamwork'],
+        'category': 'Fishing',
+      },
     ];
 
     return Scaffold(
