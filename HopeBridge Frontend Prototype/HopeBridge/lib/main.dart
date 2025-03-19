@@ -2263,6 +2263,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Basic farming knowledge', 'Physical fitness', 'Ability to work outdoors'],
         'category': 'Agriculture',
       },
+      {
+        'title': 'Security Guard',
+        'company': 'SafeWatch Security',
+        'location': 'Kurunegala',
+        'salary': 'LKR 40,000 - 50,000',
+        'description': 'Ensure security of premises and assist visitors.',
+        'requirements': ['Basic communication skills', 'Alertness', 'Ability to follow instructions'],
+        'category': 'Security',
+      },
     ];
 
     return Scaffold(
