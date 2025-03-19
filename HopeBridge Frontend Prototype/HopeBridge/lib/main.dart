@@ -2236,6 +2236,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Basic lifting skills', 'Time management', 'Teamwork'],
         'category': 'Logistics',
       },
+      {
+        'title': 'Janitor',
+        'company': 'CleanMate Services',
+        'location': 'Colombo',
+        'salary': 'LKR 30,000 - 40,000',
+        'description': 'Maintain cleanliness in buildings and offices.',
+        'requirements': ['Attention to detail', 'Ability to use cleaning equipment', 'Punctuality'],
+        'category': 'Cleaning',
+      },
     ];
 
     return Scaffold(
