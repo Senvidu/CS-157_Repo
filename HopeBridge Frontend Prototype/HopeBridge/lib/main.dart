@@ -2299,6 +2299,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Ability to use cleaning products', 'Time management', 'Punctuality'],
         'category': 'Cleaning',
       },
+      {
+        'title': 'Mason Helper',
+        'company': 'SolidBuild Constructions',
+        'location': 'Jaffna',
+        'salary': 'LKR 35,000 - 45,000',
+        'description': 'Assist masons in construction work.',
+        'requirements': ['Basic bricklaying knowledge', 'Physical strength', 'Teamwork'],
+        'category': 'Labor',
+      }
     ];
 
     return Scaffold(
