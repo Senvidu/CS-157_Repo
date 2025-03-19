@@ -2290,6 +2290,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Basic gardening skills', 'Physical fitness', 'Attention to detail'],
         'category': 'Hospitality',
       },
+      {
+        'title': 'Cleaner',
+        'company': 'Sparkle Cleaning Services',
+        'location': 'Matara',
+        'salary': 'LKR 30,000 - 35,000',
+        'description': 'Clean homes, offices, and public spaces.',
+        'requirements': ['Ability to use cleaning products', 'Time management', 'Punctuality'],
+        'category': 'Cleaning',
+      },
     ];
 
     return Scaffold(
