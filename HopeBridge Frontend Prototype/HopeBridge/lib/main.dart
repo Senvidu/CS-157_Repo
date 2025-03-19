@@ -1,0 +1,2650 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'dart:async';
+import 'package:url_launcher/url_launcher.dart';
+
+void main() {
+  runApp(const HopeBridgeApp());
+}
+
+class HopeBridgeApp extends StatelessWidget {
+  const HopeBridgeApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      title: 'HopeBridge',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.black,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.black,
+          brightness: Brightness.light,
+        ),
+        useMaterial3: true,
+      ),
+      routerConfig: _router,
+    );
+  }
+}
+
+// App Router Configuration
+final GoRouter _router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: '/user-type',
+      builder: (context, state) => const UserTypeScreen(),
+    ),
+    GoRoute(
+      path: '/login/:userType',
+      builder: (context, state) {
+        final userType = state.pathParameters['userType'] ?? 'Donor';
+        return LoginScreen(userType: userType);
+      },
+    ),
+    GoRoute(
+      path: '/signup/:userType',
+      builder: (context, state) {
+        final userType = state.pathParameters['userType'] ?? 'Donor';
+        return SignupScreen(userType: userType);
+      },
+    ),
+    GoRoute(
+      path: '/recipient-options',
+      builder: (context, state) => const RecipientOptionsScreen(),
+    ),
+    GoRoute(
+      path: '/recipient-no-phone',
+      builder: (context, state) => const RecipientNoPhoneScreen(),
+    ),
+    GoRoute(
+      path: '/fundraising',
+      builder: (context, state) => const FundraisingPage(),
+    ),
+    GoRoute(
+      path: '/fundraising-landing',
+      builder: (context, state) => const FundraisingLandingPage(),
+    ),
+    GoRoute(
+      path: '/recipient-home',
+      builder: (context, state) => const RecipientHomePage(),
+    ),
+    GoRoute(
+      path: '/job-finder',
+      builder: (context, state) => const JobFinderPage(),
+    ),
+     GoRoute(
+      path: '/job-listing',
+      builder: (context, state) => const JobListingPage(),
+    ),
+  ],
+);
+
+// Social media and contact URLs
+class AppUrls {
+  static const String instagramUrl =
+      'https://www.instagram.com/_hope_bridge_?igsh=cnZhMnh4dHdpNGht';
+  static const String emailAddress = 'hopebridgelk@gmail.com';
+
+  static Future<void> launchInstagram() async {
+    final Uri uri = Uri.parse(instagramUrl);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $instagramUrl');
+    }
+  }
+
+  static Future<void> launchEmail() async {
+    final Uri uri = Uri.parse('mailto:$emailAddress');
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $emailAddress');
+    }
+  }
+}
+
+// Logo Size Enum for better control
+enum LogoSize { small, medium, large }
+
+// Reusable Logo Component
+class HopeBridgeLogo extends StatelessWidget {
+  final bool isBlackBackground;
+  final LogoSize size;
+
+  const HopeBridgeLogo({
+    super.key,
+    required this.isBlackBackground,
+    this.size = LogoSize.medium,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // Determine text colors based on background
+    Color textColor = isBlackBackground ? Colors.white : Colors.black;
+    Color boxColor = isBlackBackground ? Colors.white : Colors.black;
+    Color boxTextColor = isBlackBackground ? Colors.black : Colors.white;
+
+    // Determine font sizes based on logo size
+    double fontSize;
+    double boxFontSize;
+
+    switch (size) {
+      case LogoSize.small:
+        fontSize = 20.0;
+        boxFontSize = 8.0;
+        break;
+      case LogoSize.medium:
+        fontSize = 26.0;
+        boxFontSize = 10.0;
+        break;
+      case LogoSize.large:
+        fontSize = 48.0;
+        boxFontSize = 16.0;
+        break;
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          'hope.',
+          style: TextStyle(
+            color: textColor,
+            fontSize: fontSize,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(left: 2),
+          padding: EdgeInsets.symmetric(
+              horizontal: size == LogoSize.large ? 5 : 3,
+              vertical: size == LogoSize.large ? 2 : 1),
+          color: boxColor,
+          child: Text(
+            'BRIDGE',
+            style: TextStyle(
+              color: boxTextColor,
+              fontSize: boxFontSize,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// Splash Screen
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 3), () {
+      if (mounted) {
+        context.go('/user-type');
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Logo
+            const HopeBridgeLogo(isBlackBackground: true, size: LogoSize.large),
+            const SizedBox(height: 40),
+            // Image placeholder - Fixed to fill properly
+            SizedBox(
+              width: size.width * 0.7,
+              height: size.height * 0.25,
+              child: Image.asset(
+                'assets/images/hands.png',
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) => const Icon(
+                  Icons.people_alt_outlined,
+                  color: Colors.white,
+                  size: 100,
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
+            const CircularProgressIndicator(color: Colors.white),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// User Type Selection Screen
+class UserTypeScreen extends StatelessWidget {
+  const UserTypeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: HopeBridgeLogo(
+                  isBlackBackground: false, size: LogoSize.medium),
+            ),
+            // Hand image - Fixed to fill properly
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Image.asset(
+                  'assets/hand_silhouette.png',
+                  fit: BoxFit.contain,
+                  width: double.infinity,
+                  height: double.infinity,
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                    Icons.handshake_outlined,
+                    color: Colors.black54,
+                    size: 120,
+                  ),
+                ),
+              ),
+            ),
+            // User type selection
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Are You a',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 15),
+                  // Donor button
+                  AppButton(
+                    label: 'Donor',
+                    onPressed: () => context.go('/login/Donor'),
+                  ),
+                  const SizedBox(height: 15),
+                  // Recipient button
+                  AppButton(
+                    label: 'Recipient',
+                    onPressed: () => context.go('/recipient-options'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// NEW RECIPIENT OPTIONS SCREEN
+class RecipientOptionsScreen extends StatelessWidget {
+  const RecipientOptionsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 40),
+              // Logo
+              const Center(
+                child: HopeBridgeLogo(
+                    isBlackBackground: true, size: LogoSize.medium),
+              ),
+              const SizedBox(height: 50),
+
+              // Tagline text
+              const Text(
+                'CONNECTING GENEROSITY DIRECTLY TO THOSE IN NEED',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  height: 1.2,
+                ),
+              ),
+
+              const Spacer(),
+
+              // Recipient text
+              const Text(
+                'I\'m a Recipient',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Phone options
+              AppButton(
+                label: 'I have a phone',
+                backgroundColor: Colors.white,
+                textColor: Colors.black,
+                onPressed: () => context.go('/login/Recipient'),
+              ),
+              const SizedBox(height: 15),
+              AppButton(
+                label: 'I don\'t have a phone',
+                backgroundColor: Colors.white,
+                textColor: Colors.black,
+                onPressed: () {
+                  context.go('/recipient-no-phone');
+                  // Handle when recipient doesn't have a phone
+                  // You can add additional functionality here
+                },
+              ),
+              const SizedBox(height: 80),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Reusable App Button
+class AppButton extends StatelessWidget {
+  final String label;
+  final VoidCallback onPressed;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final EdgeInsets? padding;
+  final Widget? icon;
+
+  const AppButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.backgroundColor,
+    this.textColor,
+    this.padding,
+    this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor ?? Colors.black,
+        foregroundColor: textColor ?? Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        minimumSize: const Size(double.infinity, 50),
+        padding: padding ?? const EdgeInsets.symmetric(vertical: 12),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (icon != null) ...[
+            icon!,
+            const SizedBox(width: 8),
+          ],
+          Text(label),
+        ],
+      ),
+    );
+  }
+}
+
+// Custom TextField Widget
+class AppTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String hintText;
+  final bool isPassword;
+  final TextInputType keyboardType;
+  final Widget? suffixIcon;
+  final bool darkMode;
+
+  const AppTextField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    this.isPassword = false,
+    this.keyboardType = TextInputType.text,
+    this.suffixIcon,
+    this.darkMode = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final textColor = darkMode ? Colors.white : Colors.black;
+    final borderColor = darkMode ? Colors.white : Colors.black;
+
+    return TextField(
+      controller: controller,
+      obscureText: isPassword,
+      style: TextStyle(color: textColor),
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: TextStyle(color: darkMode ? Colors.grey : Colors.black54),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: borderColor),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: borderColor, width: 2),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        suffixIcon: suffixIcon,
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      ),
+    );
+  }
+}
+
+// Social Media Button
+class SocialButton extends StatelessWidget {
+  final Widget child;
+  final VoidCallback onTap;
+  final Color backgroundColor;
+  final Color? foregroundColor;
+
+  const SocialButton({
+    super.key,
+    required this.child,
+    required this.onTap,
+    required this.backgroundColor,
+    this.foregroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+// Login Screen
+class LoginScreen extends StatefulWidget {
+  final String userType;
+
+  const LoginScreen({super.key, required this.userType});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _obscurePassword = true;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 50),
+              // Logo
+              const HopeBridgeLogo(isBlackBackground: true),
+              const SizedBox(height: 60),
+
+              // Login heading
+              const Text(
+                'LOGIN',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              // Email field
+              AppTextField(
+                controller: _emailController,
+                hintText: 'Email',
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const SizedBox(height: 20),
+
+              // Password field
+              AppTextField(
+                controller: _passwordController,
+                hintText: 'Password',
+                isPassword: _obscurePassword,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
+                  },
+                ),
+              ),
+
+              // Forgot password link
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  onPressed: () {
+                    // Handle forgot password
+                  },
+                  child: const Text(
+                    'Forgot Password?',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+
+              const Spacer(),
+
+              // Sign in button
+              Center(
+                child: AppButton(
+                    label: 'Sign in',
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 10),
+                    onPressed: () {
+                      // Handle sign in
+                      if (widget.userType == 'Donor') {
+                        context.go('/fundraising-landing');
+                      } else {
+                        context.go('/recipient-home');
+                      }
+                      // Handle regular signup for other user types
+                      // Add your signup logic here
+                    }),
+              ),
+
+              const SizedBox(height: 20),
+
+              // OR Login with divider
+              _buildDividerWithText('Or Login with'),
+
+              const SizedBox(height: 20),
+
+              // Social login buttons - Updated with Instagram instead of Facebook
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Google
+                  SocialButton(
+                    backgroundColor: Colors.white,
+                    onTap: () {
+                      // Handle Google login
+                    },
+                    child: const Text(
+                      'G',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+
+                  // Instagram - Updated from Facebook
+                  SocialButton(
+                    backgroundColor: Colors.pink,
+                    onTap: () {
+                      AppUrls.launchInstagram();
+                    },
+                    child: const Icon(
+                      Icons.camera_alt,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+
+                  // Email
+                  SocialButton(
+                    backgroundColor: Colors.white,
+                    onTap: () {
+                      AppUrls.launchEmail();
+                    },
+                    child: const Icon(
+                      Icons.email,
+                      color: Colors.black,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              // Create account link
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Don\'t have an account?',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      context.go('/signup/${widget.userType}');
+                    },
+                    child: const Text(
+                      'Create account',
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Divider with text
+  Widget _buildDividerWithText(String text) {
+    return Row(
+      children: [
+        const Expanded(
+          child: Divider(color: Colors.grey),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            text,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+        const Expanded(
+          child: Divider(color: Colors.grey),
+        ),
+      ],
+    );
+  }
+}
+
+// Signup Screen
+class SignupScreen extends StatefulWidget {
+  final String userType;
+
+  const SignupScreen({super.key, required this.userType});
+
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _countryController = TextEditingController();
+  final _postalCodeController = TextEditingController();
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _countryController.dispose();
+    _postalCodeController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 40),
+              // Logo
+              const HopeBridgeLogo(isBlackBackground: true),
+              const SizedBox(height: 40),
+
+              // I'm a Donor/Recipient heading
+              Text(
+                "I'm a ${widget.userType}",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              // Form fields
+              _buildFormFields(),
+              const SizedBox(height: 30),
+
+              // Sign up button
+              Center(
+                child: AppButton(
+                    label: 'Sign up',
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 10),
+                    icon: const Icon(Icons.arrow_forward, size: 16),
+                    onPressed: () {
+                      // Handle sign up
+                      if (widget.userType == 'Donor') {
+                        context.go('/fundraising-landing');
+                      } else {
+                        context.go('/recipient-home');
+                      }
+                      // Handle regular signup for other user types
+                      // Add your signup logic here
+                    }),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Login link
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Already have an account?',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      context.go('/login/${widget.userType}');
+                    },
+                    child: const Text(
+                      'Login here',
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFormFields() {
+    return Column(
+      children: [
+        AppTextField(
+          controller: _firstNameController,
+          hintText: 'First Name',
+        ),
+        const SizedBox(height: 15),
+        AppTextField(
+          controller: _lastNameController,
+          hintText: 'Last Name',
+        ),
+        const SizedBox(height: 15),
+        AppTextField(
+          controller: _phoneController,
+          hintText: 'Phone Number',
+          keyboardType: TextInputType.phone,
+        ),
+        const SizedBox(height: 15),
+        AppTextField(
+          controller: _emailController,
+          hintText: 'Email',
+          keyboardType: TextInputType.emailAddress,
+        ),
+        const SizedBox(height: 15),
+        AppTextField(
+          controller: _usernameController,
+          hintText: 'Username',
+        ),
+        const SizedBox(height: 15),
+        AppTextField(
+          controller: _passwordController,
+          hintText: 'Password',
+          isPassword: true,
+        ),
+        const SizedBox(height: 15),
+        AppTextField(
+          controller: _confirmPasswordController,
+          hintText: 'Confirm Password',
+          isPassword: true,
+        ),
+        const SizedBox(height: 15),
+        AppTextField(
+          controller: _countryController,
+          hintText: 'Country',
+        ),
+        const SizedBox(height: 15),
+        AppTextField(
+          controller: _postalCodeController,
+          hintText: 'Postal Code',
+        ),
+      ],
+    );
+  }
+}
+
+//Recipient without a phone page
+class RecipientNoPhoneScreen extends StatelessWidget {
+  const RecipientNoPhoneScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 50),
+                // Logo
+                const Center(
+                  child: HopeBridgeLogo(
+                      isBlackBackground: true, size: LogoSize.medium),
+                ),
+                const SizedBox(height: 80),
+
+                // Recipient ID field
+                const TextField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: 'Recipient ID',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Password field
+                const TextField(
+                  obscureText: true,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  ),
+                ),
+                const SizedBox(height: 60),
+
+                // Sign up button
+                SizedBox(
+                  width: 200,
+                  child: AppButton(
+                    label: 'Sign up',
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
+                    onPressed: () {
+                      context.go('/recipient-home');
+                    },
+                  ),
+                ),
+                const SizedBox(height: 30),
+
+                // Additional information or help text could go here
+                const Text(
+                  'This login is for recipients who don\'t have access to a phone.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//Start fundraising page
+class FundraisingPage extends StatefulWidget {
+  const FundraisingPage({super.key});
+
+  @override
+  State<FundraisingPage> createState() => _FundraisingPageState();
+}
+
+class _FundraisingPageState extends State<FundraisingPage> {
+  final _titleController = TextEditingController();
+  final _goalController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  DateTime? _endDate;
+
+  // Track if user has selected a category
+  //String _selectedCategory = 'Medical';
+  //final List<String> _categories = [
+  //'Medical',
+  //'Education',
+  //'Disaster Relief',
+  //'Food & Water',
+  //'Shelter',
+  //'Other'
+  //];
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _goalController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _endDate ?? DateTime.now().add(const Duration(days: 30)),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+    );
+    if (picked != null && picked != _endDate) {
+      setState(() {
+        _endDate = picked;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title:
+            const HopeBridgeLogo(isBlackBackground: true, size: LogoSize.small),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/signup/Donor'),
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              const Text(
+                'START A FUNDRAISER',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Connect generosity to those in need',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              // Fundraiser form
+              _buildFundraiserForm(),
+              const SizedBox(height: 40),
+
+              // Create fundraiser button
+              Center(
+                child: AppButton(
+                  label: 'Create Fundraiser',
+                  backgroundColor: Colors.white,
+                  textColor: Colors.black,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                  onPressed: () {
+                    // Handle fundraiser creation
+                    _showSuccessDialog();
+                  },
+                ),
+              ),
+              const SizedBox(height: 30),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFundraiserForm() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _FormSectionTitle(title: 'Fundraiser Title'),
+        const SizedBox(height: 10),
+        AppTextField(
+          controller: _titleController,
+          hintText: 'Give your fundraiser a clear, attention-grabbing title',
+        ),
+        //const SizedBox(height: 20),
+        //const _FormSectionTitle(title: 'Category'),
+        //const SizedBox(height: 10),
+        _buildCategorySelector(),
+        const SizedBox(height: 20),
+        const _FormSectionTitle(title: 'Fundraising Goal'),
+        const SizedBox(height: 10),
+        AppTextField(
+          controller: _goalController,
+          hintText: 'Amount (LKR)',
+          keyboardType: TextInputType.number,
+        ),
+        const SizedBox(height: 20),
+        const _FormSectionTitle(title: 'End Date'),
+        const SizedBox(height: 10),
+        _buildDateSelector(),
+        const SizedBox(height: 20),
+        const _FormSectionTitle(title: 'Description'),
+        const SizedBox(height: 10),
+        AppTextField(
+          controller: _descriptionController,
+          hintText:
+              'Tell your story and explain what the funds will be used for...',
+          darkMode: true,
+        ),
+        const SizedBox(height: 10),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.withOpacity(0.3)),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Tips for a successful fundraiser:',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 8),
+              _BulletPoint(text: 'Be specific about how funds will help'),
+              _BulletPoint(
+                  text: 'Share personal stories and photos if possible'),
+              _BulletPoint(text: 'Keep supporters updated on progress'),
+              _BulletPoint(text: 'Express gratitude for all donations'),
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+        const _FormSectionTitle(title: 'Upload Photos/Videos'),
+        const SizedBox(height: 10),
+        _buildMediaUploader(),
+      ],
+    );
+  }
+
+  Widget _buildCategorySelector() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.white),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      //child: DropdownButton<String>(
+      //value: _selectedCategory,
+      //isExpanded: true,
+      //dropdownColor: Colors.black,
+      //underline: const SizedBox(),
+      //style: const TextStyle(color: Colors.white),
+      //icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+      //onChanged: (String? newValue) {
+      //if (newValue != null) {
+      //setState(() {
+      //_selectedCategory = newValue;
+      //});
+      //}
+      //},
+      //items: _categories.map<DropdownMenuItem<String>>((String value) {
+      // return DropdownMenuItem<String>(
+      // value: value,
+      //child: Text(value),
+      //);
+      //}).toList(),
+      // ),
+    );
+  }
+
+  Widget _buildDateSelector() {
+    return InkWell(
+      onTap: () => _selectDate(context),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              _endDate == null
+                  ? 'Select end date'
+                  : '${_endDate!.day}/${_endDate!.month}/${_endDate!.year}',
+              style: TextStyle(
+                color: _endDate == null ? Colors.grey : Colors.white,
+              ),
+            ),
+            const Icon(Icons.calendar_today, color: Colors.white),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMediaUploader() {
+    return Container(
+      width: double.infinity,
+      height: 120,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.white),
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.black,
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.cloud_upload_outlined,
+              color: Colors.white,
+              size: 40,
+            ),
+            const SizedBox(height: 10),
+            AppButton(
+              label: 'Upload Media',
+              backgroundColor: Colors.white.withOpacity(0.2),
+              textColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              onPressed: () {
+                // Handle media upload
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: const BorderSide(color: Colors.white, width: 1),
+          ),
+          title: const Text(
+            'Fundraiser Created!',
+            style: TextStyle(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.check_circle_outline,
+                color: Colors.green,
+                size: 60,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Your fundraiser has been created successfully. Start sharing it with your network!',
+                style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _SocialShareButton(
+                    icon: Icons.facebook,
+                    color: Colors.blue,
+                    onTap: () {},
+                  ),
+                  _SocialShareButton(
+                    icon: Icons.camera_alt,
+                    color: Colors.pink,
+                    onTap: () {},
+                  ),
+                  _SocialShareButton(
+                    icon: Icons.email,
+                    color: Colors.red,
+                    onTap: () {},
+                  ),
+                  _SocialShareButton(
+                    icon: Icons.link,
+                    color: Colors.green,
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: const Text(
+                'View My Fundraiser',
+                style: TextStyle(color: Colors.blue),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Navigate to fundraiser page
+              },
+            ),
+            TextButton(
+              child: const Text(
+                'Close',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+// Helper widgets
+class _FormSectionTitle extends StatelessWidget {
+  final String title;
+
+  const _FormSectionTitle({required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+    );
+  }
+}
+
+class _BulletPoint extends StatelessWidget {
+  final String text;
+
+  const _BulletPoint({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('• ', style: TextStyle(color: Colors.white)),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(color: Colors.white, fontSize: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SocialShareButton extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _SocialShareButton({
+    required this.icon,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.2),
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          icon,
+          color: color,
+          size: 20,
+        ),
+      ),
+    );
+  }
+}
+
+//fundraising start
+
+class FundraisingLandingPage extends StatelessWidget {
+  const FundraisingLandingPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Column(
+        children: [
+          // Logo section at the top
+          SafeArea(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              alignment: Alignment.center,
+              child: const HopeBridgeLogo(
+                  isBlackBackground: true, size: LogoSize.medium),
+            ),
+          ),
+
+          // Main content
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // White card and image section
+                  Stack(
+                    children: [
+                      // Background image (right half)
+                      Positioned(
+                        right: 0,
+                        child: SizedBox(
+                          width: size.width * 0.5,
+                          height: size.width * 0.8,
+                          child: Image.asset(
+                            'assets/images/mother_child.png',
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Container(
+                              color: Colors.grey.shade800,
+                              child: const Icon(
+                                Icons.family_restroom,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      // White card section (left half)
+                      SizedBox(
+                        width: size.width,
+                        height: size.width * 0.8,
+                        child: Row(
+                          children: [
+                            // White card content
+                            Container(
+                              width: size.width * 0.5,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(30),
+                                  bottomRight: Radius.circular(30),
+                                ),
+                              ),
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "START\nFUNDRAISING\nON HOPE BRIDGE",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  const Text(
+                                    "Everything you need to make your fundraiser a success in right here.",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  const Text(
+                                    "Launch your campaign on the leading crowdfunding platform today",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.black,
+                                      foregroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 10,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      context.go('/fundraising');
+                                    },
+                                    child: const Text(
+                                      "START",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            // Transparent container to support right image
+                            Container(
+                              width: size.width * 0.5,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // Donations counter section
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: Column(
+                      children: [
+                        const Text(
+                          "DONATIONS DONE SO FAR",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        const Text(
+                          "230+",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Menu items
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                    child: Column(
+                      children: [
+                        _buildMenuItem(
+                          context,
+                          "Top tips for your hope bridge fundraiser",
+                          () {
+                            // Navigate to tips page
+                          },
+                        ),
+                        const SizedBox(height: 15),
+                        _buildMenuItem(
+                          context,
+                          "our journey so far",
+                          () {
+                            // Navigate to journey page
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper method to build menu items
+  Widget _buildMenuItem(
+      BuildContext context, String title, VoidCallback onTap) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 25),
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        trailing: const Icon(
+          Icons.arrow_forward_ios,
+          size: 18,
+        ),
+        onTap: onTap,
+      ),
+    );
+  }
+}
+
+// Recipient Home Page
+class RecipientHomePage extends StatelessWidget {
+  const RecipientHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+
+              // Header with logo and profile icon
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const HopeBridgeLogo(
+                      isBlackBackground: true, size: LogoSize.medium),
+                  const CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 15,
+                    child: Icon(
+                      Icons.person,
+                      color: Colors.black,
+                      size: 20,
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              // Voucher Card
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  children: [
+                    // Red voucher tag icon
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                      ),
+                      child: const Icon(
+                        Icons.local_offer,
+                        color: Colors.white,
+                        size: 25,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'e voucher',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 10,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                            color: Colors.green,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        const Text(
+                          'Available',
+                          style: TextStyle(
+                            color: Colors.green,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 15),
+
+              // Points Card
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Column(
+                  children: [
+                    Text(
+                      '13345',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Recipient points',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 15),
+
+              // Find a job button
+              AppButton(
+                label: 'Find a job',
+                onPressed: () {
+                  context.go('/job-finder');
+                },
+                backgroundColor: Colors.white,
+                textColor: Colors.red,
+              ),
+
+              // You can add more content here if needed
+              const Spacer(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//Employment platform
+class JobFinderPage extends StatefulWidget {
+  const JobFinderPage({super.key});
+
+  @override
+  State<JobFinderPage> createState() => _JobFinderPageState();
+}
+
+class _JobFinderPageState extends State<JobFinderPage> {
+  final TextEditingController _skillsController = TextEditingController();
+  String _selectedCategory = 'Job Category';
+  final List<String> _addedSkills = [];
+
+  @override
+  void dispose() {
+    _skillsController.dispose();
+    super.dispose();
+  }
+
+  void _addSkill() {
+    if (_skillsController.text.isNotEmpty) {
+      setState(() {
+        _addedSkills.add(_skillsController.text);
+        _skillsController.clear();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Logo section
+            const Padding(
+              padding: EdgeInsets.only(top: 50.0, left: 20.0, right: 20.0),
+              child: Center(
+                child: HopeBridgeLogo(
+                  isBlackBackground: true,
+                  size: LogoSize.medium,
+                ),
+              ),
+            ),
+
+            // Job Finder Title
+            const Padding(
+              padding: EdgeInsets.only(left: 20.0, top: 30.0, bottom: 20.0),
+              child: Text(
+                'JOB FINDER',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            // White card with search section and image
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 0),
+              height: 380,
+              child: Stack(
+                children: [
+                  // Left side (white part with text)
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          bottomRight: Radius.circular(30),
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'search for',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'your',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'future',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'job',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Right side (construction workers image)
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Image.asset(
+                      'assets/images/construction_workers.jpg',
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[800],
+                        child: const Center(
+                          child: Icon(
+                            Icons.engineering,
+                            color: Colors.white70,
+                            size: 60,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 40),
+
+            // Skills input area
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: InkWell(
+                onTap: () {
+                  // Show bottom sheet or dialog for adding skills
+                  _showAddSkillsSheet();
+                },
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        _addedSkills.isEmpty
+                            ? 'Add Skills'
+                            : _addedSkills.join(', '),
+                        style: TextStyle(
+                          color: _addedSkills.isEmpty
+                              ? Colors.black54
+                              : Colors.black,
+                        ),
+                      ),
+                      const Icon(Icons.add, color: Colors.black),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Job category dropdown
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: _selectedCategory,
+                    isExpanded: true,
+                    icon:
+                        const Icon(Icons.arrow_drop_down, color: Colors.black),
+                    items: <String>[
+                      'Job Category',
+                      'Construction',
+                      'Healthcare',
+                      'Education',
+                      'Technology',
+                      'Hospitality',
+                      'Manufacturing',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedCategory = newValue!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 40),
+
+            // Find a job button
+            Center(
+              child: SizedBox(
+                width: 150,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Handle job search
+                    context.go('/job-listing');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                  child: const Text(
+                    'Find a job',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 40),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showAddSkillsSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.black,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            top: 20,
+            left: 20,
+            right: 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Add Skills',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: AppTextField(
+                      controller: _skillsController,
+                      hintText: 'Enter a skill',
+                      darkMode: true,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      _addSkill();
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 15,
+                      ),
+                    ),
+                    child: const Text('Add'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              if (_addedSkills.isNotEmpty) ...[
+                const Text(
+                  'Added Skills:',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: _addedSkills
+                      .map((skill) => Chip(
+                            label: Text(skill),
+                            backgroundColor: Colors.white,
+                            deleteIconColor: Colors.black,
+                            onDeleted: () {
+                              setState(() {
+                                _addedSkills.remove(skill);
+                              });
+                            },
+                          ))
+                      .toList(),
+                ),
+              ],
+              const SizedBox(height: 30),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+// Job Listing Page
+class JobListingPage extends StatelessWidget {
+  const JobListingPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    
+    final jobs = [
+      {
+        'title': 'Construction Worker',
+        'company': 'BuildRight Ltd',
+        'location': 'Colombo',
+        'salary': 'LKR 35,000 - 45,000',
+        'description': 'Looking for experienced construction workers for a commercial building project.',
+        'requirements': ['Physical fitness', 'Previous experience', 'Own transportation'],
+        'category': 'Construction',
+      },
+      {
+        'title': 'Kitchen Assistant',
+        'company': 'Royal Hotel',
+        'location': 'Kandy',
+        'salary': 'LKR 30,000 - 40,000',
+        'description': 'Assist in food preparation and kitchen operations in a busy hotel.',
+        'requirements': ['Basic cooking skills', 'Cleanliness', 'Ability to work shifts'],
+        'category': 'Hospitality',
+      },
+      {
+        'title': 'Delivery Driver',
+        'company': 'QuickShip Logistics',
+        'location': 'Galle',
+        'salary': 'LKR 40,000 - 50,000',
+        'description': 'Deliver packages within the city and surrounding areas.',
+        'requirements': ['Valid driving license', '2+ years driving experience', 'Knowledge of local routes'],
+        'category': 'Transportation',
+      },
+      {
+        'title': 'Caregiver',
+        'company': 'Sunrise Elderly Care',
+        'location': 'Colombo',
+        'salary': 'LKR 45,000 - 55,000',
+        'description': 'Provide care and assistance to elderly residents in a care home.',
+        'requirements': ['Compassion', 'Basic medical knowledge', 'Patience'],
+        'category': 'Healthcare',
+      },
+      {
+        'title': 'Factory Worker',
+        'company': 'TextileCraft Industries',
+        'location': 'Negombo',
+        'salary': 'LKR 32,000 - 38,000',
+        'description': 'Operate machinery and assist in the production of textiles.',
+        'requirements': ['Ability to stand for long periods', 'Attention to detail', 'Basic technical skills'],
+        'category': 'Manufacturing',
+      },
+    ];
+
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const HopeBridgeLogo(isBlackBackground: true, size: LogoSize.small),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/job-finder'),
+        ),
+      ),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text(
+                'AVAILABLE JOBS',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                itemCount: jobs.length,
+                itemBuilder: (context, index) {
+                  final job = jobs[index];
+                  return _JobCard(job: job);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _JobCard extends StatelessWidget {
+  final Map<String, dynamic> job;
+
+  const _JobCard({required this.job});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Job header with category badge
+          Container(
+            padding: const EdgeInsets.all(15),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.black12, width: 1),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        job['title'],
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        job['company'],
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    job['category'],
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Job details
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Location and salary
+                Row(
+                  children: [
+                    const Icon(Icons.location_on, size: 16),
+                    const SizedBox(width: 5),
+                    Text(job['location']),
+                    const SizedBox(width: 20),
+                    const Icon(Icons.monetization_on, size: 16),
+                    const SizedBox(width: 5),
+                    Expanded(
+                      child: Text(
+                        job['salary'],
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                
+                // Description
+                Text(
+                  job['description'],
+                  style: const TextStyle(fontSize: 14),
+                ),
+                const SizedBox(height: 15),
+                
+                // Requirements
+                const Text(
+                  'Requirements:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: (job['requirements'] as List).map<Widget>((requirement) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('• '),
+                          Expanded(
+                            child: Text(requirement),
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 15),
+                
+                // Apply button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Handle apply
+                        _showApplyDialog(context, job);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      ),
+                      child: const Text('Apply Now'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Handle save job
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Job saved to your profile'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                      child: const Row(
+                        children: [
+                          Icon(Icons.bookmark_border, size: 16),
+                          SizedBox(width: 5),
+                          Text('Save'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showApplyDialog(BuildContext context, Map<String, dynamic> job) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: const BorderSide(color: Colors.white, width: 1),
+          ),
+          title: Text(
+            'Apply for ${job['title']}',
+            style: const TextStyle(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Company and location
+              Row(
+                children: [
+                  const Icon(Icons.business, color: Colors.white70, size: 16),
+                  const SizedBox(width: 5),
+                  Text(
+                    job['company'],
+                    style: const TextStyle(color: Colors.white70),
+                  ),
+                  const SizedBox(width: 15),
+                  const Icon(Icons.location_on, color: Colors.white70, size: 16),
+                  const SizedBox(width: 5),
+                  Text(
+                    job['location'],
+                    style: const TextStyle(color: Colors.white70),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              
+              // Application options
+              const Text(
+                'How would you like to apply?',
+                style: TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 10),
+              
+              // Apply with HopeBridge Profile
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _showSuccessDialog(context, job);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  minimumSize: const Size(double.infinity, 45),
+                ),
+                child: const Text('Apply with HopeBridge Profile'),
+              ),
+              const SizedBox(height: 10),
+              
+              // Send Contact Info
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _showContactInfoDialog(context, job);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white.withOpacity(0.2),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  minimumSize: const Size(double.infinity, 45),
+                ),
+                child: const Text('Send Contact Info'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.white70),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showContactInfoDialog(BuildContext context, Map<String, dynamic> job) {
+    final phoneController = TextEditingController();
+    final emailController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: const BorderSide(color: Colors.white, width: 1),
+          ),
+          title: const Text(
+            'Contact Information',
+            style: TextStyle(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppTextField(
+                controller: phoneController,
+                hintText: 'Phone Number',
+                keyboardType: TextInputType.phone,
+              ),
+              const SizedBox(height: 15),
+              AppTextField(
+                controller: emailController,
+                hintText: 'Email Address',
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _showSuccessDialog(context, job);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  minimumSize: const Size(double.infinity, 45),
+                ),
+                child: const Text('Submit Application'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.white70),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSuccessDialog(BuildContext context, Map<String, dynamic> job) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: const BorderSide(color: Colors.white, width: 1),
+          ),
+          title: const Text(
+            'Application Submitted!',
+            style: TextStyle(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.check_circle_outline,
+                color: Colors.green,
+                size: 60,
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Your application for ${job['title']} at ${job['company']} has been submitted successfully.',
+                style: const TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'The employer will contact you if they are interested in your profile.',
+                style: TextStyle(color: Colors.white70, fontSize: 14),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  minimumSize: const Size(double.infinity, 50), // Full-width button
+                ),
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
