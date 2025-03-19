@@ -2209,6 +2209,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Ability to stand for long periods', 'Attention to detail', 'Basic technical skills'],
         'category': 'Manufacturing',
       },
+      {
+        'title': 'Gardner',
+        'company': 'GardenEscapes',
+        'location': 'Kiribathgoda',
+        'salary': 'LKR 30,000 - 35,000',
+        'description': 'clean and maintain gardens.',
+        'requirements': ['Ability to do gardening', 'Creativity', 'Basic skills'],
+        'category': 'Hospitality',
+      },
     ];
 
     return Scaffold(
