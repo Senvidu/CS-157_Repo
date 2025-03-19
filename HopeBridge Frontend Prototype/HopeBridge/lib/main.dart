@@ -2254,6 +2254,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Basic swimming skills', 'Ability to work long hours', 'Teamwork'],
         'category': 'Fishing',
       },
+      {
+        'title': 'Farm Worker',
+        'company': 'GreenHarvest Farms',
+        'location': 'Anuradhapura',
+        'salary': 'LKR 30,000 - 40,000',
+        'description': 'Help in planting, harvesting, and farm maintenance.',
+        'requirements': ['Basic farming knowledge', 'Physical fitness', 'Ability to work outdoors'],
+        'category': 'Agriculture',
+      },
     ];
 
     return Scaffold(
