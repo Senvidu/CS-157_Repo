@@ -2466,7 +2466,7 @@ class _JobCard extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               
-              // Application options
+              // Application options with or without profile
               const Text(
                 'How would you like to apply?',
                 style: TextStyle(color: Colors.white),
