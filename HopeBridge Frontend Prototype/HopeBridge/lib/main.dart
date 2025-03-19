@@ -2281,6 +2281,15 @@ class JobListingPage extends StatelessWidget {
         'requirements': ['Basic math skills', 'Customer service', 'Ability to stand for long hours'],
         'category': 'Retail',
       },
+      {
+        'title': 'Gardener',
+        'company': 'GreenScape Solutions',
+        'location': 'Galle',
+        'salary': 'LKR 30,000 - 40,000',
+        'description': 'Maintain and beautify gardens and landscapes.',
+        'requirements': ['Basic gardening skills', 'Physical fitness', 'Attention to detail'],
+        'category': 'Hospitality',
+      },
     ];
 
     return Scaffold(
