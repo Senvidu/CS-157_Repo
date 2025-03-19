@@ -2505,7 +2505,7 @@ class _JobCard extends StatelessWidget {
                   ),
                   minimumSize: const Size(double.infinity, 45),
                 ),
-                child: const Text('Send Contact Info'),
+                child: const Text('Send Contact Information'),
               ),
             ],
           ),
