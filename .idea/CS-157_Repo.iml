@@ -5,6 +5,9 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/HopeBridge Frontend Prototype/HopeBridge/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/HopeBridge Frontend Prototype/HopeBridge/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/HopeBridge Frontend Prototype/HopeBridge/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
