@@ -384,7 +384,7 @@ class RecipientOptionsScreen extends StatelessWidget {
   }
 }
 
-// Reusable App Button
+// Reusable app button
 class AppButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
