@@ -430,7 +430,7 @@ class AppButton extends StatelessWidget {
   }
 }
 
-// Custom TextField Widget
+// Custom Textfield button
 class AppTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
