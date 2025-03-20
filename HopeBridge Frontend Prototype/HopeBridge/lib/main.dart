@@ -572,7 +572,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 30),
 
-              // Field for Email
+              // Field For Email
               AppTextField(
                 controller: _emailController,
                 hintText: 'Email',
