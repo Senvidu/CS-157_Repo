@@ -2833,7 +2833,8 @@ class _EShopPageState extends State<EShopPage> {
           IconButton(
             icon: const Icon(Icons.shopping_cart, color: Colors.white),
             onPressed: () {
-              context.go('/cart');
+              // Pass the cart to the CartPage
+              context.go('/cart', extra: cart);
             },
           ),
         ],
@@ -2890,19 +2891,15 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  // Sample cart data (replace with your actual cart logic)
-  final List<Map<String, dynamic>> cart = [
-    {
-      'name': 'Rice (1kg)',
-      'price': 100,
-      'image': 'assets/images/rice.jpg',
-    },
-    {
-      'name': 'Flour (1kg)',
-      'price': 80,
-      'image': 'assets/images/flour.jpg',
-    },
-  ];
+  // Cart data passed from EShopPage
+  late List<Map<String, dynamic>> cart;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Retrieve the cart from the extra parameter
+    cart = GoRouterState.of(context).extra as List<Map<String, dynamic>>;
+  }
 
   int get totalPrice {
     return cart.fold(0, (sum, item) => sum + item['price']);
@@ -2923,7 +2920,14 @@ class _CartPageState extends State<CartPage> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
+            child: cart.isEmpty
+                ? const Center(
+              child: Text(
+                'Your cart is empty',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            )
+                : ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: cart.length,
               itemBuilder: (context, index) {
@@ -2969,7 +2973,16 @@ class _CartPageState extends State<CartPage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    context.go('/checkout');
+                    if (cart.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Your cart is empty!'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    } else {
+                      context.go('/checkout', extra: cart);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -2985,13 +2998,15 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
-
 //Checkout page
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve the cart from the extra parameter
+    final cart = GoRouterState.of(context).extra as List<Map<String, dynamic>>;
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -3017,9 +3032,9 @@ class CheckoutPage extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Your voucher points have been deducted.',
-              style: TextStyle(color: Colors.white70),
+            Text(
+              '${cart.length} items purchased for ${cart.fold(0, (sum, item) => sum + item['price'])} Voucher Points.',
+              style: const TextStyle(color: Colors.white70),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
