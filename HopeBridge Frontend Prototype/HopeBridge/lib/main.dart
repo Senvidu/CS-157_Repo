@@ -295,7 +295,7 @@ class UserTypeScreen extends StatelessWidget {
                     onPressed: () => context.go('/login/Donor'),
                   ),
                   const SizedBox(height: 15),
-                  // Recipient button
+                  // Recipient
                   AppButton(
                     label: 'Recipient',
                     onPressed: () => context.go('/recipient-options'),
