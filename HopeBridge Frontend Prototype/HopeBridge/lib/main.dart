@@ -325,7 +325,7 @@ class RecipientOptionsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 40),
-              // Logo
+              // LOGO
               const Center(
                 child: HopeBridgeLogo(
                     isBlackBackground: true, size: LogoSize.medium),
