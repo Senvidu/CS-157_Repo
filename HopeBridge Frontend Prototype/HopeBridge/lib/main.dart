@@ -106,7 +106,7 @@ class AppUrls {
   }
 }
 
-// Logo Size Enum for better control
+// Recognizing logo sizes for improved management
 enum LogoSize { small, medium, large }
 
 // Reusable Logo Component
