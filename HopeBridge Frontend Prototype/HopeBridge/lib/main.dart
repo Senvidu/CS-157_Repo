@@ -1777,7 +1777,7 @@ class RecipientHomePage extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-
+              const Spacer(),
               // Find a job button
               AppButton(
                 label: 'Find a job',
@@ -1787,8 +1787,19 @@ class RecipientHomePage extends StatelessWidget {
                 backgroundColor: Colors.white,
                 textColor: Colors.red,
               ),
+              const Spacer(),
 
-              // You can add more content here if needed
+              //Eshop Button
+
+              AppButton(
+                label: 'eShop',
+                onPressed: () {
+                  //context.go('/job-finder');
+                },
+                backgroundColor: Colors.white,
+                textColor: Colors.red,
+              ),
+
               const Spacer(),
             ],
           ),
