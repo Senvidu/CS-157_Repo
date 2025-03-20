@@ -310,7 +310,7 @@ class UserTypeScreen extends StatelessWidget {
   }
 }
 
-// NEW RECIPIENT OPTIONS SCREEN
+// New recipient options screen
 class RecipientOptionsScreen extends StatelessWidget {
   const RecipientOptionsScreen({super.key});
 
