@@ -206,7 +206,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo
+            // Logo of HopeBridge
             const HopeBridgeLogo(isBlackBackground: true, size: LogoSize.large),
             const SizedBox(height: 40),
             // Image placeholder - Fixed to fill properly
