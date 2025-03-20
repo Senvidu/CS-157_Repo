@@ -232,7 +232,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-// User Type Selection Screen
+// The type of the User selection screen
 class UserTypeScreen extends StatelessWidget {
   const UserTypeScreen({super.key});
 
