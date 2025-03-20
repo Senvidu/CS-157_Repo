@@ -3265,3 +3265,99 @@ class CheckoutPage extends StatelessWidget {
     );
   }
 }
+
+//Top tips for the fundraiser page
+class TopTipsPage extends StatelessWidget {
+  const TopTipsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text('Top Tips for Your Fundraiser', style: TextStyle(color: Colors.white)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/donor-home'),
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Top Tips for Your HopeBridge Fundraiser',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Creating a successful fundraiser on HopeBridge is easy! Follow these tips to maximize your impact:',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 20),
+            _buildTip(
+              title: '1. Set a Clear Goal',
+              description: 'Define how much you need to raise and what the funds will be used for. Be specific and transparent.',
+            ),
+            _buildTip(
+              title: '2. Tell a Compelling Story',
+              description: 'Share your personal story and explain why this cause matters to you. Use photos and videos to make it more engaging.',
+            ),
+            _buildTip(
+              title: '3. Promote Your Fundraiser',
+              description: 'Share your fundraiser on social media, email, and with friends and family. The more people you reach, the better!',
+            ),
+            _buildTip(
+              title: '4. Keep Supporters Updated',
+              description: 'Regularly update your supporters on your progress and how their donations are making a difference.',
+            ),
+            _buildTip(
+              title: '5. Express Gratitude',
+              description: 'Thank your donors and acknowledge their contributions. A simple thank-you message goes a long way.',
+            ),
+            _buildTip(
+              title: '6. Stay Active',
+              description: 'Respond to comments and questions from supporters. Show them that you’re actively involved in the fundraiser.',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTip({required String title, required String description}) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            description,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
