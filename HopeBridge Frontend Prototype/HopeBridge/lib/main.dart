@@ -289,7 +289,7 @@ class UserTypeScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 15),
-                  // Donor button
+                  // Donor
                   AppButton(
                     label: 'Donor',
                     onPressed: () => context.go('/login/Donor'),
