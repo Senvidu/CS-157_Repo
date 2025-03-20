@@ -244,7 +244,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-// User Type Selection Screen
+// The type of the User selection screen
 class UserTypeScreen extends StatelessWidget {
   const UserTypeScreen({super.key});
 
@@ -260,7 +260,7 @@ class UserTypeScreen extends StatelessWidget {
               child: HopeBridgeLogo(
                   isBlackBackground: false, size: LogoSize.medium),
             ),
-            // Hand image - Fixed to fill properly
+            // Hand Image - Filled to fill the screen
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -289,13 +289,13 @@ class UserTypeScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 15),
-                  // Donor button
+                  // Donor
                   AppButton(
                     label: 'Donor',
                     onPressed: () => context.go('/login/Donor'),
                   ),
                   const SizedBox(height: 15),
-                  // Recipient button
+                  // Recipient
                   AppButton(
                     label: 'Recipient',
                     onPressed: () => context.go('/recipient-options'),
