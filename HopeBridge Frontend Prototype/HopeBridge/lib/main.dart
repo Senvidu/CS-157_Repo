@@ -490,7 +490,7 @@ class AppTextField extends StatelessWidget {
   }
 }
 
-// Social Media Button
+// Button for Social Media
 class SocialButton extends StatelessWidget {
   final Widget child;
   final VoidCallback onTap;
