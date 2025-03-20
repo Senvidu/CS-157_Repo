@@ -598,7 +598,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
 
-              // Forgot password link
+              // Forgot Password link
               Align(
                 alignment: Alignment.centerLeft,
                 child: TextButton(
