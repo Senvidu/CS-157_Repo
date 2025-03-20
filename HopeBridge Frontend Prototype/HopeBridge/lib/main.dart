@@ -1627,7 +1627,7 @@ class FundraisingLandingPage extends StatelessWidget {
                           context,
                           "Top tips for your hope bridge fundraiser",
                           () {
-                            // Navigate to tips page
+                            context.go('/top-tips');
                           },
                         ),
                         const SizedBox(height: 15),
@@ -1635,7 +1635,7 @@ class FundraisingLandingPage extends StatelessWidget {
                           context,
                           "our journey so far",
                           () {
-                            // Navigate to journey page
+                            context.go('/our-journey');
                           },
                         ),
                       ],
