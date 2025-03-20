@@ -310,7 +310,7 @@ class UserTypeScreen extends StatelessWidget {
   }
 }
 
-// NEW RECIPIENT OPTIONS SCREEN
+// New recipient options screen
 class RecipientOptionsScreen extends StatelessWidget {
   const RecipientOptionsScreen({super.key});
 
@@ -325,14 +325,14 @@ class RecipientOptionsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 40),
-              // Logo
+              // LOGO
               const Center(
                 child: HopeBridgeLogo(
                     isBlackBackground: true, size: LogoSize.medium),
               ),
               const SizedBox(height: 50),
 
-              // Tagline text
+              // Tagline Text
               const Text(
                 'CONNECTING GENEROSITY DIRECTLY TO THOSE IN NEED',
                 textAlign: TextAlign.center,
@@ -346,7 +346,7 @@ class RecipientOptionsScreen extends StatelessWidget {
 
               const Spacer(),
 
-              // Recipient text
+              // Recipient Text
               const Text(
                 'I\'m a Recipient',
                 style: TextStyle(
@@ -384,7 +384,7 @@ class RecipientOptionsScreen extends StatelessWidget {
   }
 }
 
-// Reusable App Button
+// Reusable app button
 class AppButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
