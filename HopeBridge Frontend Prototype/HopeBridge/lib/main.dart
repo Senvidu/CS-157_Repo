@@ -82,6 +82,18 @@ final GoRouter _router = GoRouter(
       path: '/job-listing',
       builder: (context, state) => const JobListingPage(),
     ),
+    GoRoute(
+      path: '/eshop',
+      builder: (context, state) => const EShopPage(),
+    ),
+    GoRoute(
+      path: '/cart',
+      builder: (context, state) => const CartPage(),
+    ),
+    GoRoute(
+      path: '/checkout',
+      builder: (context, state) => const CheckoutPage(),
+    ),
   ],
 );
 
