@@ -346,7 +346,7 @@ class RecipientOptionsScreen extends StatelessWidget {
 
               const Spacer(),
 
-              // Recipient text
+              // Recipient Text
               const Text(
                 'I\'m a Recipient',
                 style: TextStyle(
