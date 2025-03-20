@@ -28,7 +28,11 @@ class HopeBridgeApp extends StatelessWidget {
   }
 }
 
+
 // App Router Configuration.
+
+// HopeBridge router configuration
+
 final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: [
@@ -93,6 +97,14 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/checkout',
       builder: (context, state) => const CheckoutPage(),
+    ),
+    GoRoute(
+      path: '/our-journey',
+      builder: (context, state) => const OurJourneyPage(),
+    ),
+    GoRoute(
+      path: '/top-tips',
+      builder: (context, state) => const TopTipsPage(),
     ),
   ],
 );
@@ -1615,7 +1627,7 @@ class FundraisingLandingPage extends StatelessWidget {
                           context,
                           "Top tips for your hope bridge fundraiser",
                           () {
-                            // Navigate to tips page
+                            context.go('/top-tips');
                           },
                         ),
                         const SizedBox(height: 15),
@@ -1623,7 +1635,7 @@ class FundraisingLandingPage extends StatelessWidget {
                           context,
                           "our journey so far",
                           () {
-                            // Navigate to journey page
+                            context.go('/our-journey');
                           },
                         ),
                       ],
@@ -2783,6 +2795,7 @@ class EShopPage extends StatefulWidget {
 class _EShopPageState extends State<EShopPage> {
   // Sample list of items
   final List<Map<String, dynamic>> items = [
+  final List<Map<String, dynamic>> items = [
     {
       'name': 'Rice (1kg)',
       'price': 100,
@@ -2799,6 +2812,56 @@ class _EShopPageState extends State<EShopPage> {
       'image': 'assets/images/dhal.jpg',
     },
     {
+      'name': 'Sugar (1kg)',
+      'price': 90,
+      'image': 'assets/images/sugar.jpg',
+    },
+    {
+      'name': 'Tea (250g)',
+      'price': 150,
+      'image': 'assets/images/tea.jpg',
+    },
+    {
+      'name': 'Milk Powder (400g)',
+      'price': 200,
+      'image': 'assets/images/milk_powder.jpg',
+    },
+    {
+      'name': 'Cooking Oil (1L)',
+      'price': 300,
+      'image': 'assets/images/cooking_oil.jpg',
+    },
+    {
+      'name': 'Salt (1kg)',
+      'price': 50,
+      'image': 'assets/images/salt.jpg',
+    },
+    {
+      'name': 'Bread (Loaf)',
+      'price': 60,
+      'image': 'assets/images/bread.jpg',
+    },
+    {
+      'name': 'Eggs (Dozen)',
+      'price': 120,
+      'image': 'assets/images/eggs.jpg',
+    },
+    {
+      'name': 'Potatoes (1kg)',
+      'price': 70,
+      'image': 'assets/images/potatoes.jpg',
+    },
+    {
+      'name': 'Onions (1kg)',
+      'price': 80,
+      'image': 'assets/images/onions.jpg',
+    },
+    {
+      'name': 'Tomatoes (1kg)',
+      'price': 90,
+      'image': 'assets/images/tomatoes.jpg',
+    },
+    {
       'name': 'School Bag',
       'price': 500,
       'image': 'assets/images/school_bag.jpg',
@@ -2813,6 +2876,167 @@ class _EShopPageState extends State<EShopPage> {
       'price': 40,
       'image': 'assets/images/pencils.jpg',
     },
+    {
+      'name': 'Notebooks (Pack of 5)',
+      'price': 150,
+      'image': 'assets/images/notebooks.jpg',
+    },
+    {
+      'name': 'Erasers (Pack of 5)',
+      'price': 30,
+      'image': 'assets/images/erasers.jpg',
+    },
+    {
+      'name': 'Toothpaste',
+      'price': 100,
+      'image': 'assets/images/toothpaste.jpg',
+    },
+    {
+      'name': 'Soap (Bar)',
+      'price': 50,
+      'image': 'assets/images/soap.jpg',
+    },
+    {
+      'name': 'Shampoo (200ml)',
+      'price': 200,
+      'image': 'assets/images/shampoo.jpg',
+    },
+    {
+      'name': 'Toothbrush',
+      'price': 40,
+      'image': 'assets/images/toothbrush.jpg',
+    },
+    {
+      'name': 'Sanitary Pads (Pack of 10)',
+      'price': 250,
+      'image': 'assets/images/sanitary_pads.jpg',
+    },
+    {
+      'name': 'Baby Diapers (Pack of 20)',
+      'price': 600,
+      'image': 'assets/images/diapers.jpg',
+    },
+    {
+      'name': 'Baby Formula (400g)',
+      'price': 800,
+      'image': 'assets/images/baby_formula.jpg',
+    },
+    {
+      'name': 'Canned Fish (Tin)',
+      'price': 150,
+      'image': 'assets/images/canned_fish.jpg',
+    },
+    {
+      'name': 'Canned Beans (Tin)',
+      'price': 120,
+      'image': 'assets/images/canned_beans.jpg',
+    },
+    {
+      'name': 'Biscuits (Pack of 10)',
+      'price': 100,
+      'image': 'assets/images/biscuits.jpg',
+    },
+    {
+      'name': 'Noodles (Pack of 5)',
+      'price': 200,
+      'image': 'assets/images/noodles.jpg',
+    },
+    {
+      'name': 'Cooking Gas (5kg)',
+      'price': 1500,
+      'image': 'assets/images/cooking_gas.jpg',
+    },
+    {
+      'name': 'Matches (Box of 10)',
+      'price': 20,
+      'image': 'assets/images/matches.jpg',
+    },
+    {
+      'name': 'Candles (Pack of 5)',
+      'price': 50,
+      'image': 'assets/images/candles.jpg',
+    },
+    {
+      'name': 'Blanket',
+      'price': 800,
+      'image': 'assets/images/blanket.jpg',
+    },
+    {
+      'name': 'Mosquito Net',
+      'price': 500,
+      'image': 'assets/images/mosquito_net.jpg',
+    },
+    {
+      'name': 'First Aid Kit',
+      'price': 400,
+      'image': 'assets/images/first_aid_kit.jpg',
+    },
+    {
+      'name': 'Umbrella',
+      'price': 300,
+      'image': 'assets/images/umbrella.jpg',
+    },
+    {
+      'name': 'Water Bottle (1L)',
+      'price': 150,
+      'image': 'assets/images/water_bottle.jpg',
+    },
+    {
+      'name': 'Plates (Set of 6)',
+      'price': 200,
+      'image': 'assets/images/plates.jpg',
+    },
+    {
+      'name': 'Cups (Set of 6)',
+      'price': 150,
+      'image': 'assets/images/cups.jpg',
+    },
+    {
+      'name': 'Spoons (Set of 6)',
+      'price': 100,
+      'image': 'assets/images/spoons.jpg',
+    },
+    {
+      'name': 'Knives (Set of 3)',
+      'price': 150,
+      'image': 'assets/images/knives.jpg',
+    },
+    {
+      'name': 'Towels (Set of 2)',
+      'price': 300,
+      'image': 'assets/images/towels.jpg',
+    },
+    {
+      'name': 'Slippers (Pair)',
+      'price': 200,
+      'image': 'assets/images/slippers.jpg',
+    },
+    {
+      'name': 'Shoes (Pair)',
+      'price': 600,
+      'image': 'assets/images/shoes.jpg',
+    },
+    {
+      'name': 'T-Shirt',
+      'price': 300,
+      'image': 'assets/images/tshirt.jpg',
+    },
+    {
+      'name': 'Jeans',
+      'price': 500,
+      'image': 'assets/images/jeans.jpg',
+    },
+    {
+      'name': 'Underwear (Pack of 3)',
+      'price': 200,
+      'image': 'assets/images/underwear.jpg',
+    },
+    {
+      'name': 'Socks (Pack of 3)',
+      'price': 150,
+      'image': 'assets/images/socks.jpg',
+    },
+  ];
   ];
 
   // Cart to store selected items
@@ -3049,6 +3273,1215 @@ class CheckoutPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+//Top tips for the fundraiser page
+class TopTipsPage extends StatelessWidget {
+  const TopTipsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF121212),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF121212),
+        elevation: 0,
+        title: const Text('Fundraising Tips',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+          onPressed: () => context.go('/fundraising-landing'),
+        ),
+      ),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          children: [
+            const SizedBox(height: 10),
+            _buildHeader(),
+            const SizedBox(height: 25),
+            _buildIntroCard(),
+            const SizedBox(height: 30),
+            _buildTipsSection(),
+            const SizedBox(height: 30),
+            _buildQuickActionCard(),
+            const SizedBox(height: 30),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF4A7AFF),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Text(
+                'HopeBridge Essentials',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const Spacer(),
+            IconButton(
+              icon: const Icon(Icons.bookmark_border, color: Colors.white70),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        const SizedBox(height: 15),
+        const Text(
+          'Top Tips for a Successful Fundraiser',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            height: 1.2,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildIntroCard() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF2C3E50), Color(0xFF4A7AFF)],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blue.withOpacity(0.2),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(
+                Icons.lightbulb_outline,
+                color: Colors.yellow,
+                size: 28,
+              ),
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Text(
+                  'Creating a fundraiser that resonates with donors is all about authenticity and clear communication.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
+          const Text(
+            'Our fundraisers raise 35% more when following these tips!',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              _buildStatCard('73%', 'Higher visibility'),
+              const SizedBox(width: 10),
+              _buildStatCard('2.8x', 'More shares'),
+              const SizedBox(width: 10),
+              _buildStatCard('48%', 'Faster funding'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatCard(String value, String label) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          children: [
+            Text(
+              value,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 11,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTipsSection() {
+    final tips = [
+      {
+        'icon': Icons.flag,
+        'color': const Color(0xFF4CAF50),
+        'title': 'Set a Clear Goal',
+        'description': 'Define how much you need to raise and what the funds will be used for. Being specific builds donor trust and confidence.',
+      },
+      {
+        'icon': Icons.auto_stories,
+        'color': const Color(0xFFFF9800),
+        'title': 'Tell a Compelling Story',
+        'description': 'Share your personal journey and explain why this cause matters. Add photos and videos to make an emotional connection.',
+      },
+      {
+        'icon': Icons.campaign,
+        'color': const Color(0xFFE91E63),
+        'title': 'Promote Strategically',
+        'description': 'Share your fundraiser across multiple channels. Create a posting schedule and use our share tools for maximum reach.',
+      },
+      {
+        'icon': Icons.update,
+        'color': const Color(0xFF2196F3),
+        'title': 'Keep Supporters Updated',
+        'description': 'Regular updates keep donors engaged and show progress. Share milestones and how their donations are making a difference.',
+      },
+      {
+        'icon': Icons.favorite,
+        'color': const Color(0xFFF44336),
+        'title': 'Express Gratitude',
+        'description': 'Thank your donors promptly and personally. Recognition encourages repeat donations and word-of-mouth promotion.',
+      },
+      {
+        'icon': Icons.forum,
+        'color': const Color(0xFF9C27B0),
+        'title': 'Stay Active & Responsive',
+        'description': 'Answer questions quickly and engage with comments. This builds community around your cause and shows your commitment.',
+      },
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: tips.asMap().entries.map((entry) {
+        final index = entry.key;
+        final tip = entry.value;
+        return _buildTipCard(
+          index: index + 1,
+          icon: tip['icon'] as IconData,
+          color: tip['color'] as Color,
+          title: tip['title'] as String,
+          description: tip['description'] as String,
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildTipCard({
+    required int index,
+    required IconData icon,
+    required Color color,
+    required String title,
+    required String description,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E1E1E),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: ExpansionTile(
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(
+            icon,
+            color: color,
+            size: 24,
+          ),
+        ),
+        title: Text(
+          '$index. $title',
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        iconColor: Colors.white70,
+        collapsedIconColor: Colors.white70,
+        childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        children: [
+          Text(
+            description,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuickActionCard() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E1E1E),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Ready to boost your fundraiser?',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              Expanded(
+                child: _buildActionButton(
+                  icon: Icons.tips_and_updates,
+                  label: 'Workshop',
+                  color: const Color(0xFF4A7AFF),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: _buildActionButton(
+                  icon: Icons.download,
+                  label: 'Template',
+                  color: const Color(0xFF4CAF50),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: _buildActionButton(
+                  icon: Icons.support_agent,
+                  label: 'Support',
+                  color: const Color(0xFFFF9800),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionButton({
+    required IconData icon,
+    required String label,
+    required Color color,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.3), width: 1),
+      ),
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            color: color,
+            size: 24,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+//Our journey sofar page
+class OurJourneyPage extends StatefulWidget {
+  const OurJourneyPage({super.key});
+
+  @override
+  State<OurJourneyPage> createState() => _OurJourneyPageState();
+}
+
+class _OurJourneyPageState extends State<OurJourneyPage> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  final ScrollController _scrollController = ScrollController();
+  double _scrollOffset = 0;
+  bool _showBackToTop = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    _scrollController.addListener(_onScroll);
+
+    // Optional: Add haptic feedback when page opens
+    HapticFeedback.mediumImpact();
+  }
+
+  void _onScroll() {
+    setState(() {
+      _scrollOffset = _scrollController.offset;
+      _showBackToTop = _scrollOffset > 300;
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF121212),
+      extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          color: _scrollOffset > 50
+              ? Colors.black.withOpacity(0.8)
+              : Colors.transparent,
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: Hero(
+              tag: 'backButton',
+              child: Material(
+                color: Colors.transparent,
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    context.go('/fundraising-landing');
+                  },
+                ),
+              ),
+            ),
+            title: AnimatedOpacity(
+              opacity: _scrollOffset > 50 ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 200),
+              child: const Text(
+                'Our Journey',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.share, color: Colors.white),
+                onPressed: () {
+                  // Share functionality
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Sharing our story...'))
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: _showBackToTop ? FloatingActionButton(
+        mini: true,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        onPressed: () {
+          _scrollController.animateTo(
+            0,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeOut,
+          );
+        },
+        child: const Icon(Icons.arrow_upward),
+      ) : null,
+      body: Column(
+        children: [
+          // Parallax Header
+          ParallaxHeader(scrollOffset: _scrollOffset),
+
+          // Tab Bar
+          TabBar(
+            controller: _tabController,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white60,
+            indicatorColor: Theme.of(context).primaryColor,
+            indicatorWeight: 3,
+            tabs: const [
+              Tab(text: 'JOURNEY'),
+              Tab(text: 'TEAM'),
+              Tab(text: 'IMPACT'),
+            ],
+          ),
+
+          // Tab Bar View - KEY CHANGE: Expanded to allow scrolling
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                SingleChildScrollView(
+                  controller: _scrollController,
+                  child: _buildJourneyTab(),
+                ),
+                SingleChildScrollView(
+                  controller: _scrollController,
+                  child: _buildTeamTab(),
+                ),
+                SingleChildScrollView(
+                  controller: _scrollController,
+                  child: _buildImpactTab(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildJourneyTab() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildSectionTitle('Our Mission'),
+          const SizedBox(height: 10),
+          const Text(
+            'HopeBridge was founded in 2024 with a mission to connect generosity directly to those in need. We believe in transparency, efficiency, and meaningful impact through direct assistance.',
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+          const SizedBox(height: 30),
+
+          _buildSectionTitle('Timeline'),
+          const SizedBox(height: 20),
+          _buildTimelineItem(
+            date: 'JAN 2024',
+            title: 'Launch of HopeBridge',
+            description: 'Official launch of the platform after months of planning and development.',
+            icon: Icons.rocket_launch,
+          ),
+          _buildTimelineItem(
+            date: 'MAR 2024',
+            title: 'First 100 Families Helped',
+            description: 'Reached our first milestone of supporting 100 families with essential supplies.',
+            icon: Icons.family_restroom,
+          ),
+          _buildTimelineItem(
+            date: 'JUN 2024',
+            title: 'NGO Partnerships',
+            description: 'Established partnerships with 25 local organizations to extend our reach.',
+            icon: Icons.handshake,
+          ),
+          _buildTimelineItem(
+            date: 'SEP 2024',
+            title: 'Regional Expansion',
+            description: 'Expanded to 5 new regions, bringing our total coverage to 10 regions.',
+            icon: Icons.expand,
+            isLast: true,
+          ),
+          const SizedBox(height: 30),
+
+          _buildSectionTitle('Recognition'),
+          const SizedBox(height: 20),
+          _buildAward(
+            title: 'Community Impact Award',
+            year: '2024',
+            organization: 'Social Change Foundation',
+          ),
+          _buildAward(
+            title: 'Digital Innovation in Charity',
+            year: '2024',
+            organization: 'Tech for Good Summit',
+          ),
+          const SizedBox(height: 80),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTeamTab() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 20),
+          _buildSectionTitle('Meet Our Team'),
+          const SizedBox(height: 20),
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            childAspectRatio: 0.8,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,
+            children: [
+              _buildTeamMemberCard(
+                name: 'Jayodya Abises',
+                role: 'Co-Founder & CEO',
+                description: 'Passionate about social impact with years of experience in nonprofit management.',
+                colorAccent: Colors.blueAccent,
+              ),
+              _buildTeamMemberCard(
+                name: 'Thisul Devagiri',
+                role: 'Co-Founder & COO',
+                description: 'Oversees operations and ensures the smooth functioning of HopeBridge.',
+                colorAccent: Colors.purpleAccent,
+              ),
+              _buildTeamMemberCard(
+                name: 'Chanithu Midigaspe',
+                role: 'Head of Fundraising',
+                description: 'Leads our fundraising efforts and builds partnerships with donors.',
+                colorAccent: Colors.greenAccent,
+              ),
+              _buildTeamMemberCard(
+                name: 'Pasindu Isuranda',
+                role: 'Head of Technology',
+                description: 'Responsible for the technical development of the HopeBridge platform.',
+                colorAccent: Colors.amberAccent,
+              ),
+              _buildTeamMemberCard(
+                name: 'Gihan Samaraweera',
+                role: 'Community Outreach',
+                description: 'Works closely with communities to identify needs and deliver solutions.',
+                colorAccent: Colors.redAccent,
+              ),
+              _buildTeamMemberCard(
+                name: 'Naveen Wanigabadu',
+                role: 'Finance Manager',
+                description: 'Manages finances and ensures transparency in all transactions.',
+                colorAccent: Colors.tealAccent,
+              ),
+            ],
+          ),
+          const SizedBox(height: 80),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildImpactTab() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildSectionTitle('Our Impact'),
+          const SizedBox(height: 20),
+          _buildImpactMetric(
+            title: '1,000+',
+            subtitle: 'Families Helped',
+            icon: Icons.favorite,
+            color: Colors.redAccent,
+          ),
+          _buildImpactMetric(
+            title: '50+',
+            subtitle: 'Partner Organizations',
+            icon: Icons.handshake,
+            color: Colors.blueAccent,
+          ),
+          _buildImpactMetric(
+            title: '10',
+            subtitle: 'Regions Covered',
+            icon: Icons.location_on,
+            color: Colors.greenAccent,
+          ),
+          _buildImpactMetric(
+            title: 'LKR 15M+',
+            subtitle: 'Funds Raised',
+            icon: Icons.attach_money,
+            color: Colors.amberAccent,
+          ),
+          const SizedBox(height: 30),
+
+          _buildSectionTitle('Success Stories'),
+          const SizedBox(height: 20),
+          _buildStoryCard(
+            title: 'Education for Rural Children',
+            description: 'Provided educational supplies to 200 children in rural areas, improving school attendance by 40%.',
+            region: 'Southern Province',
+          ),
+          _buildStoryCard(
+            title: 'Emergency Relief',
+            description: 'Delivered essential supplies to 150 families affected by floods within 48 hours of the disaster.',
+            region: 'Eastern Region',
+          ),
+          _buildStoryCard(
+            title: 'Healthcare Access',
+            description: 'Partnered with medical professionals to provide healthcare services to 300 individuals in underserved communities.',
+            region: 'Northern Districts',
+          ),
+          const SizedBox(height: 30),
+
+          Center(
+            child: ElevatedButton.icon(
+              icon: const Icon(Icons.volunteer_activism),
+              label: const Text('Join Our Mission'),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              ),
+              onPressed: () {
+                // Navigate to volunteer/contribution page
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Coming soon: Join our volunteer program!'))
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 80),
+        ],
+      ),
+    );
+  }
+
+  // Rest of the widget methods remain the same
+  Widget _buildSectionTitle(String title) {
+    return Row(
+      children: [
+        Container(
+          width: 4,
+          height: 24,
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.2,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTimelineItem({
+    required String date,
+    required String title,
+    required String description,
+    required IconData icon,
+    bool isLast = false,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: Colors.white, size: 20),
+            ),
+            if (!isLast)
+              Container(
+                width: 2,
+                height: 70,
+                color: Colors.white24,
+              ),
+          ],
+        ),
+        const SizedBox(width: 15),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                date,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                description,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAward({
+    required String title,
+    required String year,
+    required String organization,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.amber.withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.emoji_events, color: Colors.amber, size: 30),
+          ),
+          const SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '$organization · $year',
+                  style: const TextStyle(
+                    color: Colors.white60,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTeamMemberCard({
+    required String name,
+    required String role,
+    required String description,
+    required Color colorAccent,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: colorAccent.withOpacity(0.3)),
+      ),
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Avatar placeholder with gradient
+          Container(
+            height: 80,
+            width: 80,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  colorAccent.withOpacity(0.7),
+                  colorAccent.withOpacity(0.3),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child: Center(
+              child: Text(
+                name.split(' ').map((part) => part[0]).join(''),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            name,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            role,
+            style: TextStyle(
+              color: colorAccent,
+              fontSize: 14,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Expanded(
+            child: Text(
+              description,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildImpactMetric({
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.2),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: color, size: 30),
+          ),
+          const SizedBox(width: 15),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStoryCard({
+    required String title,
+    required String description,
+    required String region,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.black,
+            Colors.blueGrey.shade900,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.location_on, color: Colors.white54, size: 14),
+                    const SizedBox(width: 4),
+                    Text(
+                      region,
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            description,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  // View full story action
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Full story coming soon!'))
+                  );
+                },
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white70,
+                ),
+                child: const Row(
+                  children: [
+                    Text('Read full story', style: TextStyle(fontSize: 12)),
+                    SizedBox(width: 4),
+                    Icon(Icons.arrow_forward, size: 12),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ParallaxHeader extends StatelessWidget {
+  final double scrollOffset;
+
+  const ParallaxHeader({
+    super.key,
+    required this.scrollOffset,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      child: Stack(
+        children: [
+          // Parallax background
+          Transform.translate(
+            offset: Offset(0, scrollOffset * 0.5),
+            child: Container(
+              height: 300,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Theme.of(context).primaryColor,
+                    Colors.black,
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+          // Animated overlay patterns
+          Positioned(
+            right: -50 + (scrollOffset * 0.2),
+            top: 20,
+            child: Opacity(
+              opacity: 0.2,
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 20,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          Positioned(
+            left: -70 - (scrollOffset * 0.1),
+            bottom: 0,
+            child: Opacity(
+              opacity: 0.1,
+              child: Container(
+                width: 150,
+                height: 150,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+
+          // Content
+          Container(
+            height: 300,
+            padding: const EdgeInsets.fromLTRB(20, 100, 20, 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Transform.translate(
+                  offset: Offset(0, -scrollOffset * 0.2),
+                  child: const Text(
+                    'Our Journey',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Opacity(
+                  opacity: math.max(0, 1 - scrollOffset / 100),
+                  child: const Text(
+                    'Connecting generosity directly to those in need since 2023',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
