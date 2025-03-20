@@ -28,7 +28,7 @@ class HopeBridgeApp extends StatelessWidget {
   }
 }
 
-// App Router Configuration
+// App Router Configuration.
 final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: [
@@ -85,7 +85,7 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-// Social media and contact URLs
+// Contact urls and Social media
 class AppUrls {
   static const String instagramUrl =
       'https://www.instagram.com/_hope_bridge_?igsh=cnZhMnh4dHdpNGht';
@@ -106,7 +106,7 @@ class AppUrls {
   }
 }
 
-// Logo Size Enum for better control
+// Recognizing logo sizes for improved management
 enum LogoSize { small, medium, large }
 
 // Reusable Logo Component
@@ -206,7 +206,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo
+            // Logo of HopeBridge
             const HopeBridgeLogo(isBlackBackground: true, size: LogoSize.large),
             const SizedBox(height: 40),
             // Image placeholder - Fixed to fill properly
