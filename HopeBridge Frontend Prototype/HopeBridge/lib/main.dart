@@ -2783,6 +2783,7 @@ class EShopPage extends StatefulWidget {
 class _EShopPageState extends State<EShopPage> {
   // Sample list of items
   final List<Map<String, dynamic>> items = [
+  final List<Map<String, dynamic>> items = [
     {
       'name': 'Rice (1kg)',
       'price': 100,
@@ -2799,6 +2800,56 @@ class _EShopPageState extends State<EShopPage> {
       'image': 'assets/images/dhal.jpg',
     },
     {
+      'name': 'Sugar (1kg)',
+      'price': 90,
+      'image': 'assets/images/sugar.jpg',
+    },
+    {
+      'name': 'Tea (250g)',
+      'price': 150,
+      'image': 'assets/images/tea.jpg',
+    },
+    {
+      'name': 'Milk Powder (400g)',
+      'price': 200,
+      'image': 'assets/images/milk_powder.jpg',
+    },
+    {
+      'name': 'Cooking Oil (1L)',
+      'price': 300,
+      'image': 'assets/images/cooking_oil.jpg',
+    },
+    {
+      'name': 'Salt (1kg)',
+      'price': 50,
+      'image': 'assets/images/salt.jpg',
+    },
+    {
+      'name': 'Bread (Loaf)',
+      'price': 60,
+      'image': 'assets/images/bread.jpg',
+    },
+    {
+      'name': 'Eggs (Dozen)',
+      'price': 120,
+      'image': 'assets/images/eggs.jpg',
+    },
+    {
+      'name': 'Potatoes (1kg)',
+      'price': 70,
+      'image': 'assets/images/potatoes.jpg',
+    },
+    {
+      'name': 'Onions (1kg)',
+      'price': 80,
+      'image': 'assets/images/onions.jpg',
+    },
+    {
+      'name': 'Tomatoes (1kg)',
+      'price': 90,
+      'image': 'assets/images/tomatoes.jpg',
+    },
+    {
       'name': 'School Bag',
       'price': 500,
       'image': 'assets/images/school_bag.jpg',
@@ -2813,6 +2864,167 @@ class _EShopPageState extends State<EShopPage> {
       'price': 40,
       'image': 'assets/images/pencils.jpg',
     },
+    {
+      'name': 'Notebooks (Pack of 5)',
+      'price': 150,
+      'image': 'assets/images/notebooks.jpg',
+    },
+    {
+      'name': 'Erasers (Pack of 5)',
+      'price': 30,
+      'image': 'assets/images/erasers.jpg',
+    },
+    {
+      'name': 'Toothpaste',
+      'price': 100,
+      'image': 'assets/images/toothpaste.jpg',
+    },
+    {
+      'name': 'Soap (Bar)',
+      'price': 50,
+      'image': 'assets/images/soap.jpg',
+    },
+    {
+      'name': 'Shampoo (200ml)',
+      'price': 200,
+      'image': 'assets/images/shampoo.jpg',
+    },
+    {
+      'name': 'Toothbrush',
+      'price': 40,
+      'image': 'assets/images/toothbrush.jpg',
+    },
+    {
+      'name': 'Sanitary Pads (Pack of 10)',
+      'price': 250,
+      'image': 'assets/images/sanitary_pads.jpg',
+    },
+    {
+      'name': 'Baby Diapers (Pack of 20)',
+      'price': 600,
+      'image': 'assets/images/diapers.jpg',
+    },
+    {
+      'name': 'Baby Formula (400g)',
+      'price': 800,
+      'image': 'assets/images/baby_formula.jpg',
+    },
+    {
+      'name': 'Canned Fish (Tin)',
+      'price': 150,
+      'image': 'assets/images/canned_fish.jpg',
+    },
+    {
+      'name': 'Canned Beans (Tin)',
+      'price': 120,
+      'image': 'assets/images/canned_beans.jpg',
+    },
+    {
+      'name': 'Biscuits (Pack of 10)',
+      'price': 100,
+      'image': 'assets/images/biscuits.jpg',
+    },
+    {
+      'name': 'Noodles (Pack of 5)',
+      'price': 200,
+      'image': 'assets/images/noodles.jpg',
+    },
+    {
+      'name': 'Cooking Gas (5kg)',
+      'price': 1500,
+      'image': 'assets/images/cooking_gas.jpg',
+    },
+    {
+      'name': 'Matches (Box of 10)',
+      'price': 20,
+      'image': 'assets/images/matches.jpg',
+    },
+    {
+      'name': 'Candles (Pack of 5)',
+      'price': 50,
+      'image': 'assets/images/candles.jpg',
+    },
+    {
+      'name': 'Blanket',
+      'price': 800,
+      'image': 'assets/images/blanket.jpg',
+    },
+    {
+      'name': 'Mosquito Net',
+      'price': 500,
+      'image': 'assets/images/mosquito_net.jpg',
+    },
+    {
+      'name': 'First Aid Kit',
+      'price': 400,
+      'image': 'assets/images/first_aid_kit.jpg',
+    },
+    {
+      'name': 'Umbrella',
+      'price': 300,
+      'image': 'assets/images/umbrella.jpg',
+    },
+    {
+      'name': 'Water Bottle (1L)',
+      'price': 150,
+      'image': 'assets/images/water_bottle.jpg',
+    },
+    {
+      'name': 'Plates (Set of 6)',
+      'price': 200,
+      'image': 'assets/images/plates.jpg',
+    },
+    {
+      'name': 'Cups (Set of 6)',
+      'price': 150,
+      'image': 'assets/images/cups.jpg',
+    },
+    {
+      'name': 'Spoons (Set of 6)',
+      'price': 100,
+      'image': 'assets/images/spoons.jpg',
+    },
+    {
+      'name': 'Knives (Set of 3)',
+      'price': 150,
+      'image': 'assets/images/knives.jpg',
+    },
+    {
+      'name': 'Towels (Set of 2)',
+      'price': 300,
+      'image': 'assets/images/towels.jpg',
+    },
+    {
+      'name': 'Slippers (Pair)',
+      'price': 200,
+      'image': 'assets/images/slippers.jpg',
+    },
+    {
+      'name': 'Shoes (Pair)',
+      'price': 600,
+      'image': 'assets/images/shoes.jpg',
+    },
+    {
+      'name': 'T-Shirt',
+      'price': 300,
+      'image': 'assets/images/tshirt.jpg',
+    },
+    {
+      'name': 'Jeans',
+      'price': 500,
+      'image': 'assets/images/jeans.jpg',
+    },
+    {
+      'name': 'Underwear (Pack of 3)',
+      'price': 200,
+      'image': 'assets/images/underwear.jpg',
+    },
+    {
+      'name': 'Socks (Pack of 3)',
+      'price': 150,
+      'image': 'assets/images/socks.jpg',
+    },
+  ];
   ];
 
   // Cart to store selected items
