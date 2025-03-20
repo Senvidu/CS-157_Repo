@@ -98,6 +98,14 @@ final GoRouter _router = GoRouter(
       path: '/checkout',
       builder: (context, state) => const CheckoutPage(),
     ),
+    GoRoute(
+      path: '/our-journey',
+      builder: (context, state) => const OurJourneyPage(),
+    ),
+    GoRoute(
+      path: '/top-tips',
+      builder: (context, state) => const TopTipsPage(),
+    ),
   ],
 );
 
