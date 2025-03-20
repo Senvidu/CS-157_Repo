@@ -332,7 +332,7 @@ class RecipientOptionsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 50),
 
-              // Tagline text
+              // Tagline Text
               const Text(
                 'CONNECTING GENEROSITY DIRECTLY TO THOSE IN NEED',
                 textAlign: TextAlign.center,
