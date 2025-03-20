@@ -28,7 +28,7 @@ class HopeBridgeApp extends StatelessWidget {
   }
 }
 
-// App Router Configuration
+// HopeBridge router configuration
 final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: [
