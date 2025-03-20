@@ -260,7 +260,7 @@ class UserTypeScreen extends StatelessWidget {
               child: HopeBridgeLogo(
                   isBlackBackground: false, size: LogoSize.medium),
             ),
-            // Hand image - Fixed to fill properly
+            // Hand Image - Filled to fill the screen
             Expanded(
               child: Container(
                 width: double.infinity,
