@@ -2771,3 +2771,112 @@ class _JobCard extends StatelessWidget {
     );
   }
 }
+
+//eSHop Page
+class EShopPage extends StatefulWidget {
+  const EShopPage({super.key});
+
+  @override
+  State<EShopPage> createState() => _EShopPageState();
+}
+
+class _EShopPageState extends State<EShopPage> {
+  // Sample list of items
+  final List<Map<String, dynamic>> items = [
+    {
+      'name': 'Rice (1kg)',
+      'price': 100,
+      'image': 'assets/images/rice.jpg',
+    },
+    {
+      'name': 'Flour (1kg)',
+      'price': 80,
+      'image': 'assets/images/flour.jpg',
+    },
+    {
+      'name': 'Dhal (1kg)',
+      'price': 120,
+      'image': 'assets/images/dhal.jpg',
+    },
+    {
+      'name': 'School Bag',
+      'price': 500,
+      'image': 'assets/images/school_bag.jpg',
+    },
+    {
+      'name': 'Pens (Pack of 10)',
+      'price': 50,
+      'image': 'assets/images/pens.jpg',
+    },
+    {
+      'name': 'Pencils (Pack of 10)',
+      'price': 40,
+      'image': 'assets/images/pencils.jpg',
+    },
+  ];
+
+  // Cart to store selected items
+  final List<Map<String, dynamic>> cart = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const HopeBridgeLogo(isBlackBackground: true, size: LogoSize.small),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/recipient-home'),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart, color: Colors.white),
+            onPressed: () {
+              context.go('/cart');
+            },
+          ),
+        ],
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          return Card(
+            color: Colors.white,
+            margin: const EdgeInsets.only(bottom: 16),
+            child: ListTile(
+              leading: Image.asset(
+                item['image'],
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const Icon(Icons.image),
+              ),
+              title: Text(
+                item['name'],
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text('${item['price']} Voucher Points'),
+              trailing: IconButton(
+                icon: const Icon(Icons.add_shopping_cart),
+                onPressed: () {
+                  setState(() {
+                    cart.add(item);
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('${item['name']} added to cart'),
+                      duration: const Duration(seconds: 1),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
