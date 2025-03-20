@@ -2985,3 +2985,56 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
+
+//Checkout page
+class CheckoutPage extends StatelessWidget {
+  const CheckoutPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text('Checkout', style: TextStyle(color: Colors.white)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/cart'),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.check_circle_outline,
+              color: Colors.green,
+              size: 60,
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Purchase Successful!',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Your voucher points have been deducted.',
+              style: TextStyle(color: Colors.white70),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/recipient-home');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+              ),
+              child: const Text('Back to Home'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
