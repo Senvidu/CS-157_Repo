@@ -2880,3 +2880,108 @@ class _EShopPageState extends State<EShopPage> {
     );
   }
 }
+
+//cart page
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  // Sample cart data (replace with your actual cart logic)
+  final List<Map<String, dynamic>> cart = [
+    {
+      'name': 'Rice (1kg)',
+      'price': 100,
+      'image': 'assets/images/rice.jpg',
+    },
+    {
+      'name': 'Flour (1kg)',
+      'price': 80,
+      'image': 'assets/images/flour.jpg',
+    },
+  ];
+
+  int get totalPrice {
+    return cart.fold(0, (sum, item) => sum + item['price']);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text('Cart', style: TextStyle(color: Colors.white)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/eshop'),
+        ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: cart.length,
+              itemBuilder: (context, index) {
+                final item = cart[index];
+                return Card(
+                  color: Colors.white,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  child: ListTile(
+                    leading: Image.asset(
+                      item['image'],
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => const Icon(Icons.image),
+                    ),
+                    title: Text(
+                      item['name'],
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text('${item['price']} Voucher Points'),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () {
+                        setState(() {
+                          cart.removeAt(index);
+                        });
+                      },
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16),
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total: $totalPrice Voucher Points',
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.go('/checkout');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text('Checkout'),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
