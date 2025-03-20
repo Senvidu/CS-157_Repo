@@ -442,7 +442,7 @@ class AppButton extends StatelessWidget {
   }
 }
 
-// Custom Textfield button
+// Custom Text field button
 class AppTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
@@ -617,7 +617,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const Spacer(),
 
-              // Sign in button
+              // Sign in Button
               Center(
                 child: AppButton(
                     label: 'Sign in',
@@ -696,7 +696,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 20),
 
-              // Create account link
+              // Create Account link
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
