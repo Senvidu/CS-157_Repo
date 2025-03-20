@@ -3279,6 +3279,385 @@ class CheckoutPage extends StatelessWidget {
 }
 
 //Top tips for the fundraiser page
+class TopTipsPage extends StatelessWidget {
+  const TopTipsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF121212),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF121212),
+        elevation: 0,
+        title: const Text('Fundraising Tips',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+          onPressed: () => context.go('/fundraising-landing'),
+        ),
+      ),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          children: [
+            const SizedBox(height: 10),
+            _buildHeader(),
+            const SizedBox(height: 25),
+            _buildIntroCard(),
+            const SizedBox(height: 30),
+            _buildTipsSection(),
+            const SizedBox(height: 30),
+            _buildQuickActionCard(),
+            const SizedBox(height: 30),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF4A7AFF),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Text(
+                'HopeBridge Essentials',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const Spacer(),
+            IconButton(
+              icon: const Icon(Icons.bookmark_border, color: Colors.white70),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        const SizedBox(height: 15),
+        const Text(
+          'Top Tips for a Successful Fundraiser',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            height: 1.2,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildIntroCard() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF2C3E50), Color(0xFF4A7AFF)],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blue.withOpacity(0.2),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(
+                Icons.lightbulb_outline,
+                color: Colors.yellow,
+                size: 28,
+              ),
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Text(
+                  'Creating a fundraiser that resonates with donors is all about authenticity and clear communication.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
+          const Text(
+            'Our fundraisers raise 35% more when following these tips!',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              _buildStatCard('73%', 'Higher visibility'),
+              const SizedBox(width: 10),
+              _buildStatCard('2.8x', 'More shares'),
+              const SizedBox(width: 10),
+              _buildStatCard('48%', 'Faster funding'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatCard(String value, String label) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          children: [
+            Text(
+              value,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 11,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTipsSection() {
+    final tips = [
+      {
+        'icon': Icons.flag,
+        'color': const Color(0xFF4CAF50),
+        'title': 'Set a Clear Goal',
+        'description': 'Define how much you need to raise and what the funds will be used for. Being specific builds donor trust and confidence.',
+      },
+      {
+        'icon': Icons.auto_stories,
+        'color': const Color(0xFFFF9800),
+        'title': 'Tell a Compelling Story',
+        'description': 'Share your personal journey and explain why this cause matters. Add photos and videos to make an emotional connection.',
+      },
+      {
+        'icon': Icons.campaign,
+        'color': const Color(0xFFE91E63),
+        'title': 'Promote Strategically',
+        'description': 'Share your fundraiser across multiple channels. Create a posting schedule and use our share tools for maximum reach.',
+      },
+      {
+        'icon': Icons.update,
+        'color': const Color(0xFF2196F3),
+        'title': 'Keep Supporters Updated',
+        'description': 'Regular updates keep donors engaged and show progress. Share milestones and how their donations are making a difference.',
+      },
+      {
+        'icon': Icons.favorite,
+        'color': const Color(0xFFF44336),
+        'title': 'Express Gratitude',
+        'description': 'Thank your donors promptly and personally. Recognition encourages repeat donations and word-of-mouth promotion.',
+      },
+      {
+        'icon': Icons.forum,
+        'color': const Color(0xFF9C27B0),
+        'title': 'Stay Active & Responsive',
+        'description': 'Answer questions quickly and engage with comments. This builds community around your cause and shows your commitment.',
+      },
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: tips.asMap().entries.map((entry) {
+        final index = entry.key;
+        final tip = entry.value;
+        return _buildTipCard(
+          index: index + 1,
+          icon: tip['icon'] as IconData,
+          color: tip['color'] as Color,
+          title: tip['title'] as String,
+          description: tip['description'] as String,
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildTipCard({
+    required int index,
+    required IconData icon,
+    required Color color,
+    required String title,
+    required String description,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E1E1E),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: ExpansionTile(
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(
+            icon,
+            color: color,
+            size: 24,
+          ),
+        ),
+        title: Text(
+          '$index. $title',
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        iconColor: Colors.white70,
+        collapsedIconColor: Colors.white70,
+        childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        children: [
+          Text(
+            description,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuickActionCard() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E1E1E),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Ready to boost your fundraiser?',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              Expanded(
+                child: _buildActionButton(
+                  icon: Icons.tips_and_updates,
+                  label: 'Workshop',
+                  color: const Color(0xFF4A7AFF),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: _buildActionButton(
+                  icon: Icons.download,
+                  label: 'Template',
+                  color: const Color(0xFF4CAF50),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: _buildActionButton(
+                  icon: Icons.support_agent,
+                  label: 'Support',
+                  color: const Color(0xFFFF9800),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionButton({
+    required IconData icon,
+    required String label,
+    required Color color,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.3), width: 1),
+      ),
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            color: color,
+            size: 24,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 
 //Our journey sofar page
