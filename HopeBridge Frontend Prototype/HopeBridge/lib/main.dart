@@ -28,7 +28,11 @@ class HopeBridgeApp extends StatelessWidget {
   }
 }
 
+
+// App Router Configuration.
+
 // HopeBridge router configuration
+
 final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: [
@@ -82,10 +86,22 @@ final GoRouter _router = GoRouter(
       path: '/job-listing',
       builder: (context, state) => const JobListingPage(),
     ),
+    GoRoute(
+      path: '/eshop',
+      builder: (context, state) => const EShopPage(),
+    ),
+    GoRoute(
+      path: '/cart',
+      builder: (context, state) => const CartPage(),
+    ),
+    GoRoute(
+      path: '/checkout',
+      builder: (context, state) => const CheckoutPage(),
+    ),
   ],
 );
 
-// Social media and contact URLs
+// Contact urls and Social media
 class AppUrls {
   static const String instagramUrl =
       'https://www.instagram.com/_hope_bridge_?igsh=cnZhMnh4dHdpNGht';
@@ -106,7 +122,7 @@ class AppUrls {
   }
 }
 
-// Logo Size Enum for better control
+// Recognizing logo sizes for improved management
 enum LogoSize { small, medium, large }
 
 // Reusable Logo Component
@@ -206,7 +222,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo
+            // Logo of HopeBridge
             const HopeBridgeLogo(isBlackBackground: true, size: LogoSize.large),
             const SizedBox(height: 40),
             // Image placeholder - Fixed to fill properly
@@ -232,7 +248,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-// User Type Selection Screen
+// The type of the User selection screen
 class UserTypeScreen extends StatelessWidget {
   const UserTypeScreen({super.key});
 
@@ -248,7 +264,7 @@ class UserTypeScreen extends StatelessWidget {
               child: HopeBridgeLogo(
                   isBlackBackground: false, size: LogoSize.medium),
             ),
-            // Hand image - Fixed to fill properly
+            // Hand Image - Filled to fill the screen
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -277,13 +293,13 @@ class UserTypeScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 15),
-                  // Donor button
+                  // Donor
                   AppButton(
                     label: 'Donor',
                     onPressed: () => context.go('/login/Donor'),
                   ),
                   const SizedBox(height: 15),
-                  // Recipient button
+                  // Recipient
                   AppButton(
                     label: 'Recipient',
                     onPressed: () => context.go('/recipient-options'),
@@ -298,7 +314,7 @@ class UserTypeScreen extends StatelessWidget {
   }
 }
 
-// NEW RECIPIENT OPTIONS SCREEN
+// New recipient options screen
 class RecipientOptionsScreen extends StatelessWidget {
   const RecipientOptionsScreen({super.key});
 
@@ -313,14 +329,14 @@ class RecipientOptionsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 40),
-              // Logo
+              // LOGO
               const Center(
                 child: HopeBridgeLogo(
                     isBlackBackground: true, size: LogoSize.medium),
               ),
               const SizedBox(height: 50),
 
-              // Tagline text
+              // Tagline Text
               const Text(
                 'CONNECTING GENEROSITY DIRECTLY TO THOSE IN NEED',
                 textAlign: TextAlign.center,
@@ -334,7 +350,7 @@ class RecipientOptionsScreen extends StatelessWidget {
 
               const Spacer(),
 
-              // Recipient text
+              // Recipient Text
               const Text(
                 'I\'m a Recipient',
                 style: TextStyle(
@@ -372,7 +388,7 @@ class RecipientOptionsScreen extends StatelessWidget {
   }
 }
 
-// Reusable App Button
+// Reusable app button
 class AppButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
@@ -1777,7 +1793,7 @@ class RecipientHomePage extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-
+              const Spacer(),
               // Find a job button
               AppButton(
                 label: 'Find a job',
@@ -1787,8 +1803,19 @@ class RecipientHomePage extends StatelessWidget {
                 backgroundColor: Colors.white,
                 textColor: Colors.red,
               ),
+              const Spacer(),
 
-              // You can add more content here if needed
+              //Eshop Button
+
+              AppButton(
+                label: 'eShop',
+                onPressed: () {
+                  //context.go('/job-finder');
+                },
+                backgroundColor: Colors.white,
+                textColor: Colors.red,
+              ),
+
               const Spacer(),
             ],
           ),
@@ -2745,6 +2772,500 @@ class _JobCard extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+//eSHop Page
+class EShopPage extends StatefulWidget {
+  const EShopPage({super.key});
+
+  @override
+  State<EShopPage> createState() => _EShopPageState();
+}
+
+class _EShopPageState extends State<EShopPage> {
+  // Sample list of items
+  final List<Map<String, dynamic>> items = [
+  final List<Map<String, dynamic>> items = [
+    {
+      'name': 'Rice (1kg)',
+      'price': 100,
+      'image': 'assets/images/rice.jpg',
+    },
+    {
+      'name': 'Flour (1kg)',
+      'price': 80,
+      'image': 'assets/images/flour.jpg',
+    },
+    {
+      'name': 'Dhal (1kg)',
+      'price': 120,
+      'image': 'assets/images/dhal.jpg',
+    },
+    {
+      'name': 'Sugar (1kg)',
+      'price': 90,
+      'image': 'assets/images/sugar.jpg',
+    },
+    {
+      'name': 'Tea (250g)',
+      'price': 150,
+      'image': 'assets/images/tea.jpg',
+    },
+    {
+      'name': 'Milk Powder (400g)',
+      'price': 200,
+      'image': 'assets/images/milk_powder.jpg',
+    },
+    {
+      'name': 'Cooking Oil (1L)',
+      'price': 300,
+      'image': 'assets/images/cooking_oil.jpg',
+    },
+    {
+      'name': 'Salt (1kg)',
+      'price': 50,
+      'image': 'assets/images/salt.jpg',
+    },
+    {
+      'name': 'Bread (Loaf)',
+      'price': 60,
+      'image': 'assets/images/bread.jpg',
+    },
+    {
+      'name': 'Eggs (Dozen)',
+      'price': 120,
+      'image': 'assets/images/eggs.jpg',
+    },
+    {
+      'name': 'Potatoes (1kg)',
+      'price': 70,
+      'image': 'assets/images/potatoes.jpg',
+    },
+    {
+      'name': 'Onions (1kg)',
+      'price': 80,
+      'image': 'assets/images/onions.jpg',
+    },
+    {
+      'name': 'Tomatoes (1kg)',
+      'price': 90,
+      'image': 'assets/images/tomatoes.jpg',
+    },
+    {
+      'name': 'School Bag',
+      'price': 500,
+      'image': 'assets/images/school_bag.jpg',
+    },
+    {
+      'name': 'Pens (Pack of 10)',
+      'price': 50,
+      'image': 'assets/images/pens.jpg',
+    },
+    {
+      'name': 'Pencils (Pack of 10)',
+      'price': 40,
+      'image': 'assets/images/pencils.jpg',
+    },
+    {
+      'name': 'Notebooks (Pack of 5)',
+      'price': 150,
+      'image': 'assets/images/notebooks.jpg',
+    },
+    {
+      'name': 'Erasers (Pack of 5)',
+      'price': 30,
+      'image': 'assets/images/erasers.jpg',
+    },
+    {
+      'name': 'Toothpaste',
+      'price': 100,
+      'image': 'assets/images/toothpaste.jpg',
+    },
+    {
+      'name': 'Soap (Bar)',
+      'price': 50,
+      'image': 'assets/images/soap.jpg',
+    },
+    {
+      'name': 'Shampoo (200ml)',
+      'price': 200,
+      'image': 'assets/images/shampoo.jpg',
+    },
+    {
+      'name': 'Toothbrush',
+      'price': 40,
+      'image': 'assets/images/toothbrush.jpg',
+    },
+    {
+      'name': 'Sanitary Pads (Pack of 10)',
+      'price': 250,
+      'image': 'assets/images/sanitary_pads.jpg',
+    },
+    {
+      'name': 'Baby Diapers (Pack of 20)',
+      'price': 600,
+      'image': 'assets/images/diapers.jpg',
+    },
+    {
+      'name': 'Baby Formula (400g)',
+      'price': 800,
+      'image': 'assets/images/baby_formula.jpg',
+    },
+    {
+      'name': 'Canned Fish (Tin)',
+      'price': 150,
+      'image': 'assets/images/canned_fish.jpg',
+    },
+    {
+      'name': 'Canned Beans (Tin)',
+      'price': 120,
+      'image': 'assets/images/canned_beans.jpg',
+    },
+    {
+      'name': 'Biscuits (Pack of 10)',
+      'price': 100,
+      'image': 'assets/images/biscuits.jpg',
+    },
+    {
+      'name': 'Noodles (Pack of 5)',
+      'price': 200,
+      'image': 'assets/images/noodles.jpg',
+    },
+    {
+      'name': 'Cooking Gas (5kg)',
+      'price': 1500,
+      'image': 'assets/images/cooking_gas.jpg',
+    },
+    {
+      'name': 'Matches (Box of 10)',
+      'price': 20,
+      'image': 'assets/images/matches.jpg',
+    },
+    {
+      'name': 'Candles (Pack of 5)',
+      'price': 50,
+      'image': 'assets/images/candles.jpg',
+    },
+    {
+      'name': 'Blanket',
+      'price': 800,
+      'image': 'assets/images/blanket.jpg',
+    },
+    {
+      'name': 'Mosquito Net',
+      'price': 500,
+      'image': 'assets/images/mosquito_net.jpg',
+    },
+    {
+      'name': 'First Aid Kit',
+      'price': 400,
+      'image': 'assets/images/first_aid_kit.jpg',
+    },
+    {
+      'name': 'Umbrella',
+      'price': 300,
+      'image': 'assets/images/umbrella.jpg',
+    },
+    {
+      'name': 'Water Bottle (1L)',
+      'price': 150,
+      'image': 'assets/images/water_bottle.jpg',
+    },
+    {
+      'name': 'Plates (Set of 6)',
+      'price': 200,
+      'image': 'assets/images/plates.jpg',
+    },
+    {
+      'name': 'Cups (Set of 6)',
+      'price': 150,
+      'image': 'assets/images/cups.jpg',
+    },
+    {
+      'name': 'Spoons (Set of 6)',
+      'price': 100,
+      'image': 'assets/images/spoons.jpg',
+    },
+    {
+      'name': 'Knives (Set of 3)',
+      'price': 150,
+      'image': 'assets/images/knives.jpg',
+    },
+    {
+      'name': 'Towels (Set of 2)',
+      'price': 300,
+      'image': 'assets/images/towels.jpg',
+    },
+    {
+      'name': 'Slippers (Pair)',
+      'price': 200,
+      'image': 'assets/images/slippers.jpg',
+    },
+    {
+      'name': 'Shoes (Pair)',
+      'price': 600,
+      'image': 'assets/images/shoes.jpg',
+    },
+    {
+      'name': 'T-Shirt',
+      'price': 300,
+      'image': 'assets/images/tshirt.jpg',
+    },
+    {
+      'name': 'Jeans',
+      'price': 500,
+      'image': 'assets/images/jeans.jpg',
+    },
+    {
+      'name': 'Underwear (Pack of 3)',
+      'price': 200,
+      'image': 'assets/images/underwear.jpg',
+    },
+    {
+      'name': 'Socks (Pack of 3)',
+      'price': 150,
+      'image': 'assets/images/socks.jpg',
+    },
+  ];
+  ];
+
+  // Cart to store selected items
+  final List<Map<String, dynamic>> cart = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const HopeBridgeLogo(isBlackBackground: true, size: LogoSize.small),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/recipient-home'),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart, color: Colors.white),
+            onPressed: () {
+              // Pass the cart to the CartPage
+              context.go('/cart', extra: cart);
+            },
+          ),
+        ],
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          return Card(
+            color: Colors.white,
+            margin: const EdgeInsets.only(bottom: 16),
+            child: ListTile(
+              leading: Image.asset(
+                item['image'],
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const Icon(Icons.image),
+              ),
+              title: Text(
+                item['name'],
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text('${item['price']} Voucher Points'),
+              trailing: IconButton(
+                icon: const Icon(Icons.add_shopping_cart),
+                onPressed: () {
+                  setState(() {
+                    cart.add(item);
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('${item['name']} added to cart'),
+                      duration: const Duration(seconds: 1),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+//cart page
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  // Cart data passed from EShopPage
+  late List<Map<String, dynamic>> cart;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Retrieve the cart from the extra parameter
+    cart = GoRouterState.of(context).extra as List<Map<String, dynamic>>;
+  }
+
+  int get totalPrice {
+    return cart.fold(0, (sum, item) => sum + item['price']);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text('Cart', style: TextStyle(color: Colors.white)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/eshop'),
+        ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: cart.isEmpty
+                ? const Center(
+              child: Text(
+                'Your cart is empty',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            )
+                : ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: cart.length,
+              itemBuilder: (context, index) {
+                final item = cart[index];
+                return Card(
+                  color: Colors.white,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  child: ListTile(
+                    leading: Image.asset(
+                      item['image'],
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => const Icon(Icons.image),
+                    ),
+                    title: Text(
+                      item['name'],
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text('${item['price']} Voucher Points'),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () {
+                        setState(() {
+                          cart.removeAt(index);
+                        });
+                      },
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16),
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total: $totalPrice Voucher Points',
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (cart.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Your cart is empty!'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    } else {
+                      context.go('/checkout', extra: cart);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text('Checkout'),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+//Checkout page
+class CheckoutPage extends StatelessWidget {
+  const CheckoutPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Retrieve the cart from the extra parameter
+    final cart = GoRouterState.of(context).extra as List<Map<String, dynamic>>;
+
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text('Checkout', style: TextStyle(color: Colors.white)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/cart'),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.check_circle_outline,
+              color: Colors.green,
+              size: 60,
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Purchase Successful!',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              '${cart.length} items purchased for ${cart.fold(0, (sum, item) => sum + item['price'])} Voucher Points.',
+              style: const TextStyle(color: Colors.white70),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/recipient-home');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+              ),
+              child: const Text('Back to Home'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
