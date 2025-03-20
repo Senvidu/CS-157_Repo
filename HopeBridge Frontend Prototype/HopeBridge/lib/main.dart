@@ -357,7 +357,7 @@ class RecipientOptionsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Phone options
+              // Phone Options
               AppButton(
                 label: 'I have a phone',
                 backgroundColor: Colors.white,
