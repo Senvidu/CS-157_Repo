@@ -2514,13 +2514,13 @@ class _JobCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 
-                // Apply button
+                //Apply button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        // Handle apply
+                        //Handle apply
                         _showApplyDialog(context, job);
                       },
                       style: ElevatedButton.styleFrom(
