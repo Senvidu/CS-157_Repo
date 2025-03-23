@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
+//user class is to identify the user
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
