@@ -22,5 +22,5 @@ public class Transaction {
     private Product product;
 
     private Double price; // Amount spent on the product
-    private boolean usedVoucher; // Indicates if a voucher was used
+    private boolean usedVoucher; // Indicates if a voucher was used or redeemed
 }
