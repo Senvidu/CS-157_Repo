@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "orders")
 @AllArgsConstructor
+//order class is to order a product from eshop
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
