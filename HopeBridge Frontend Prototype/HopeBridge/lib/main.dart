@@ -1287,7 +1287,7 @@ class _FundraisingPageState extends State<FundraisingPage> {
               textColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               onPressed: () {
-                // Handle media upload
+                //  Handle media upload
               },
             ),
           ],
