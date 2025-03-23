@@ -2460,7 +2460,7 @@ class _JobCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Location and salary
+                // Location and the  salary
                 Row(
                   children: [
                     const Icon(Icons.location_on, size: 16),
