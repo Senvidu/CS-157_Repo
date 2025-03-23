@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+//Transaction class is to handle transactions
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
