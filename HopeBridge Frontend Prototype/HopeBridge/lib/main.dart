@@ -925,7 +925,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 }
 
-//Recipient without a phone page
+// Page for recipient without a phone
 class RecipientNoPhoneScreen extends StatelessWidget {
   const RecipientNoPhoneScreen({super.key});
 
