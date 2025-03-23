@@ -1036,6 +1036,17 @@ class _FundraisingPageState extends State<FundraisingPage> {
   final _descriptionController = TextEditingController();
   DateTime? _endDate;
 
+ // Track if user has selected a category
+  //String _selectedCategory = 'Medical';
+  //final List<String> _categories = [
+  //'Medical',
+  //'Education',
+  //'Disaster Relief',
+  //'Food & Water',
+  //'Shelter',
+  //'Other'
+  //];
+
 
 
   @override
