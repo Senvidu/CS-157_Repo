@@ -948,7 +948,7 @@ class RecipientNoPhoneScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 80),
 
-                // Recipient ID field
+                // Field for Recipient ID
                 const TextField(
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
