@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+//job class to add a job to the employment portal
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
