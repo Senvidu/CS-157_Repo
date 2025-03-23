@@ -3044,7 +3044,7 @@ class _EShopPageState extends State<EShopPage> {
   ];
   ];
 
-  // Cart to store selected items
+  // Cart to store selected items for the recipient
   final List<Map<String, dynamic>> cart = [];
 
   @override
