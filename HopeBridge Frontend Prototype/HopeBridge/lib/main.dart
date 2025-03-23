@@ -799,7 +799,7 @@ class _SignupScreenState extends State<SignupScreen> {
               const HopeBridgeLogo(isBlackBackground: true),
               const SizedBox(height: 40),
 
-              // I'm a Donor/Recipient heading
+              // Heading I'm a Donor/Recipient
               Text(
                 "I'm a ${widget.userType}",
                 style: const TextStyle(
