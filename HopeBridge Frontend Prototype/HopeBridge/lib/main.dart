@@ -1456,7 +1456,7 @@ class _SocialShareButton extends StatelessWidget {
   }
 }
 
-//fundraising start
+// Starting fundraising
 
 class FundraisingLandingPage extends StatelessWidget {
   const FundraisingLandingPage({super.key});
