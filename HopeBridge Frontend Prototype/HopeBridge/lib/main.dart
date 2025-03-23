@@ -2672,7 +2672,7 @@ class _JobCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             side: const BorderSide(color: Colors.white, width: 1),
           ),
-          //contact information
+           //contact information
           title: const Text(
             'Contact Information',
             style: TextStyle(color: Colors.white),
