@@ -1804,7 +1804,7 @@ class RecipientHomePage extends StatelessWidget {
 
               const SizedBox(height: 15),
               const Spacer(),
-              // Find a job button
+              // Find a Job Button
               AppButton(
                 label: 'Find a job',
                 onPressed: () {
