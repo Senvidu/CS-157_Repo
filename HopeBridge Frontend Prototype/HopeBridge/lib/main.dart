@@ -109,7 +109,7 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-// Contact urls and Social media
+// social media links and etc
 class AppUrls {
   static const String instagramUrl =
       'https://www.instagram.com/_hope_bridge_?igsh=cnZhMnh4dHdpNGht';
@@ -201,7 +201,7 @@ class HopeBridgeLogo extends StatelessWidget {
   }
 }
 
-// Splash Screen
+//Splash Screen
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -322,7 +322,7 @@ class UserTypeScreen extends StatelessWidget {
   }
 }
 
-// New recipient options screen
+// new recipient options screen
 class RecipientOptionsScreen extends StatelessWidget {
   const RecipientOptionsScreen({super.key});
 
@@ -2454,13 +2454,13 @@ class _JobCard extends StatelessWidget {
             ),
           ),
           
-          // Job details
+          // job detail
           Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Location and salary
+                // Location and the  salary
                 Row(
                   children: [
                     const Icon(Icons.location_on, size: 16),
@@ -2514,13 +2514,13 @@ class _JobCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 
-                // Apply button
+                //Apply button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        // Handle apply
+                        //Handle apply
                         _showApplyDialog(context, job);
                       },
                       style: ElevatedButton.styleFrom(
@@ -2672,7 +2672,7 @@ class _JobCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             side: const BorderSide(color: Colors.white, width: 1),
           ),
-          //contact information
+           //contact information
           title: const Text(
             'Contact Information',
             style: TextStyle(color: Colors.white),
@@ -3036,10 +3036,25 @@ class _EShopPageState extends State<EShopPage> {
       'price': 150,
       'image': 'assets/images/socks.jpg',
     },
+    {
+      'name': 'shoe lace (Pack of 2)',
+      'price': 20,
+      'image': 'assets/images/shoe_lace.jpg',
+    },
+    {
+       'name': 'pastel (box)',
+       'price': 350,
+       'image': 'assets/images/pastel.jpg',
+    },
+    {
+        'name': 'adult diapers (pack of 20)',
+        'price': 800,
+        'image': 'assets/images/adult_diapers.jpg',
+    },
   ];
   ];
 
-  // Cart to store selected items
+  // Cart to store selected items for the recipient
   final List<Map<String, dynamic>> cart = [];
 
   @override
@@ -3222,7 +3237,7 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
-//Checkout page
+// checkout page
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
 
@@ -3660,7 +3675,7 @@ class TopTipsPage extends StatelessWidget {
 }
 
 
-//Our journey sofar page
+//Our journey so far page
 class OurJourneyPage extends StatefulWidget {
   const OurJourneyPage({super.key});
 
