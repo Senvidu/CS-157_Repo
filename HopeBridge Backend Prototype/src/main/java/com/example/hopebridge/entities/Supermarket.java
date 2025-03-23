@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Table(name = "supermarkets")
 @Data
-//Sup
+//supermarket class is to buy product through voucher
 public class Supermarket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
