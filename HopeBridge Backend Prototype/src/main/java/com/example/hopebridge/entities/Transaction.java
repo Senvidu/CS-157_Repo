@@ -21,6 +21,6 @@ public class Transaction {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private Double price; // Amount spent on the product
+    private Double price; // Indicates amount spent on the product
     private boolean usedVoucher; // Indicates if a voucher was used or redeemed
 }
