@@ -1984,7 +1984,7 @@ class _JobFinderPageState extends State<JobFinderPage> {
 
             const SizedBox(height: 40),
 
-            // Skills input area
+            // Skill input area
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: InkWell(
