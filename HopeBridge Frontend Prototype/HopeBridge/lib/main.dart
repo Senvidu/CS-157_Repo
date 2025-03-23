@@ -814,7 +814,7 @@ class _SignupScreenState extends State<SignupScreen> {
               _buildFormFields(),
               const SizedBox(height: 30),
 
-              //  Sign up button
+              // Sign up button
               Center(
                 child: AppButton(
                     label: 'Sign up',
