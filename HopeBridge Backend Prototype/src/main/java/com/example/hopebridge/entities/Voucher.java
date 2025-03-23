@@ -5,7 +5,7 @@ import lombok.Data;
 @Entity
 @Table(name = "vouchers")
 @Data
-//voucher class is to do transactions without touching money
+//voucher class is to do transactions without touching the money
 public class Voucher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
