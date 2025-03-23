@@ -3041,6 +3041,11 @@ class _EShopPageState extends State<EShopPage> {
       'price': 20,
       'image': 'assets/images/shoe_lace.jpg',
     },
+     {
+       'name': 'pastel (box)',
+       'price': 350,
+       'image': 'assets/images/pastel.jpg',
+      },
   ];
   ];
 
