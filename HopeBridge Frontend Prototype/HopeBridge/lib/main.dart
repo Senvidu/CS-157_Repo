@@ -3227,7 +3227,7 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
-//Checkout page
+// checkout page
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
 
