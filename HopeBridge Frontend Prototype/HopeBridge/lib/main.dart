@@ -2456,7 +2456,7 @@ class _JobCard extends StatelessWidget {
             ),
           ),
           
-          // Job details
+          // Job Details
           Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
