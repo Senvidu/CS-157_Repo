@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "products")
 @Data
-//Class to add products to the eshop.
+// Class to add products to the eshop
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
