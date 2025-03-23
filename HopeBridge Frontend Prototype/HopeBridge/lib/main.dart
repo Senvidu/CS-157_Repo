@@ -3665,7 +3665,7 @@ class TopTipsPage extends StatelessWidget {
 }
 
 
-//Our journey sofar page
+//Our journey so far page
 class OurJourneyPage extends StatefulWidget {
   const OurJourneyPage({super.key});
 
