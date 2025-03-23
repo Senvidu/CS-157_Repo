@@ -3036,6 +3036,11 @@ class _EShopPageState extends State<EShopPage> {
       'price': 150,
       'image': 'assets/images/socks.jpg',
     },
+    {
+      'name': 'shoe lace (Pack of 2)',
+      'price': 20,
+      'image': 'assets/images/shoe_lace.jpg',
+    },
   ];
   ];
 
