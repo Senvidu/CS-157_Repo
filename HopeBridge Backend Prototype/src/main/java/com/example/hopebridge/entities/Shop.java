@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+//shop class is to get products
 public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
