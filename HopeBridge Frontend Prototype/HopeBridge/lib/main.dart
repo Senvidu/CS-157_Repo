@@ -201,7 +201,7 @@ class HopeBridgeLogo extends StatelessWidget {
   }
 }
 
-//Splash Screen
+//SplashScreen for three seconds
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
