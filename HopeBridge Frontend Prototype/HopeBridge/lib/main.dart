@@ -968,7 +968,7 @@ class RecipientNoPhoneScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // Password field
+                // Field for Password
                 const TextField(
                   obscureText: true,
                   style: TextStyle(color: Colors.white),
