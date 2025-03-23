@@ -109,7 +109,7 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-// social media links
+// social media links and etc
 class AppUrls {
   static const String instagramUrl =
       'https://www.instagram.com/_hope_bridge_?igsh=cnZhMnh4dHdpNGht';
