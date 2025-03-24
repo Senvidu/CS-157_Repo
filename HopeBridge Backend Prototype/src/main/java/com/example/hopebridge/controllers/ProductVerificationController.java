@@ -4,10 +4,8 @@ import com.example.hopebridge.services.ProductVerificationService;
 import org.springframework.web.bind.annotation.*;
 
 
-/**
- * Controller for handling product verification requests.
- * Provides an endpoint to verify products based on their ID.
- */
+//Controller for handling product verification requests.
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductVerificationController {
