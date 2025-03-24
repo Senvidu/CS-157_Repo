@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//Provides an endpoint to create new vouchers
 @RestController
 @RequestMapping("/api/vouchers")
 public class VoucherController {
