@@ -20,7 +20,7 @@ public class OrderController {
 
     @PostMapping("/order")
     public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
-    // Placing an order and returning the saved order object
+// Creates a new order and returns the saved order details in the response.
         return ResponseEntity.ok(orderService.placeOrder(order));
     }
 
