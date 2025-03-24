@@ -17,7 +17,7 @@ public class ProductVerificationController {
     public ProductVerificationController(ProductVerificationService productVerificationService) {
         this.productVerificationService = productVerificationService;
     }
-//Endpoint to verify a product by its ID.
+//Endpoint to verify a product by its id
     @GetMapping("/verify/{productId}")
     public boolean verifyProduct(@PathVariable Long productId) {
         return productVerificationService.verifyProduct(productId);
