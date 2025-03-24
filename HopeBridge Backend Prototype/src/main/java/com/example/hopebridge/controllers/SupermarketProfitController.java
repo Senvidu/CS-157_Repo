@@ -3,6 +3,7 @@ package com.example.hopebridge.controllers;
 import com.example.hopebridge.services.SupermarketProfitService;
 import org.springframework.web.bind.annotation.*;
 
+//Controller for handling supermarket profit-related requests.
 @RestController
 @RequestMapping("/api/supermarkets")
 public class SupermarketProfitController {
