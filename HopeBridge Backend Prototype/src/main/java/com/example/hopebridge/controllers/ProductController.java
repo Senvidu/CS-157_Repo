@@ -36,9 +36,11 @@ public class ProductController {
     {
         try
         {
+        // Ensure validation for addProductRequest before passing it to service
             productService.addProduct(addProductRequest);
             return ResponseEntity.ok("The product "+addProductRequest.getName()+" was Successfully added!!");
         } catch (Exception e) {
+        // Avoid throwing generic RuntimeException, instead return a proper ResponseEntity
             throw new RuntimeException(e);
         }
     }
