@@ -14,7 +14,7 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public User registerUser(RegisterCustomerRequest user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        //ser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         User user1 = User.builder()
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())

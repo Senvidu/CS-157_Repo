@@ -21,6 +21,12 @@ public class DonationController
         return "Donation Controller is working";
     }
 
+    @GetMapping("/donations-list")
+    public ResponseEntity<List<Donation>> getDonationsList() {
+        List<Donation> donations = donationService.getAllDonations();
+        return ResponseEntity.ok(donations);
+    }
+
     private final DonationService donationService;
 
     public DonationController(DonationService donationService) {

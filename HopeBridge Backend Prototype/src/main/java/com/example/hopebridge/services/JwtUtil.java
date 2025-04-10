@@ -17,7 +17,7 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    // ✅ Generate token with username and roles
+    //  Generate token with username and roles
     public String generateToken(String username, List<String> roles) {
         return Jwts.builder()
                 .setSubject(username)
@@ -28,7 +28,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    // ✅ Extract username from token
+    //  Extract username from token
     public String extractUsername(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
@@ -38,7 +38,7 @@ public class JwtUtil {
                 .getSubject();
     }
 
-    // ✅ Extract roles from token
+    //  Extract roles from token
     public List<String> extractRoles(String token) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
@@ -49,12 +49,12 @@ public class JwtUtil {
         return (List<String>) claims.get("roles");
     }
 
-    // ✅ Validate token
+    // Validate token
     public boolean validateToken(String token, String username) {
         return username.equals(extractUsername(token)) && !isTokenExpired(token);
     }
 
-    // ✅ Check if token is expired
+    //  Check if token is expired
     private boolean isTokenExpired(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())

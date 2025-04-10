@@ -35,7 +35,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/auth/**",
-
                                 "/biometric/register",
                                 "/biometric/verify",
                                 "/biometric/**")

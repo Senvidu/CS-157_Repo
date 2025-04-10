@@ -36,7 +36,8 @@ public class DonationService
     }
 
     public List<Donation> getAllDonations() {
-        return donationRepository.findAll();
+        List<Donation> donations =  donationRepository.findAll();
+        return donations;
     }
 
     public SubsDonation makeSubscription(SubsDonation donation, User user)

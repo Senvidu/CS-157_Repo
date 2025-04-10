@@ -25,6 +25,9 @@ public class User implements UserDetails {
     private String phone;
     private String email;
 
+    @Column(unique = true)
+    private String fingerprintHash;
+
 
     @Column(unique = true, nullable = false)
     private String username;

@@ -20,5 +20,4 @@ public class Donation {
     @ManyToOne
     @JoinColumn(name = "donor_id")
     private User donor;
-
 }

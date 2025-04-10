@@ -9,17 +9,18 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Job {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
     private String description;
-    private String location;
     private Double salary;
+    private String location;
+
 
     @ManyToOne
-    @JoinColumn(name = "posted_by")
+    @JoinColumn(name = "employer_id")  // the column in "job" table referencing "user.id"
     private User employer;
 }
-
