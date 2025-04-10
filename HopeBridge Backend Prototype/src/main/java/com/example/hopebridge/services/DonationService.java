@@ -1,12 +1,23 @@
 package com.example.hopebridge.services;
 
 import com.example.hopebridge.entities.Donation;
+import com.example.hopebridge.entities.SubsDonation;
+import com.example.hopebridge.entities.User;
 import com.example.hopebridge.repos.DonationRepository;
+import com.example.hopebridge.repos.SubsDonationRepository;
+import com.example.hopebridge.repos.UserRepository;
+import com.example.hopebridge.requests.DonationReq;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DonationService {
+public class DonationService
+{
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private SubsDonationRepository subsDonationRepository;
 
     private final DonationRepository donationRepository;
 
@@ -14,11 +25,31 @@ public class DonationService {
         this.donationRepository = donationRepository;
     }
 
-    public Donation makeDonation(Donation donation) {
-        return donationRepository.save(donation);
+    public Donation makeDonation(DonationReq donation, User user) {
+
+        Donation donation1 = Donation.builder()
+                .amount(donation.getAmount())
+                .message(donation.getMessage())
+                .donor(user)
+                .build();
+        return donationRepository.save(donation1);
     }
 
     public List<Donation> getAllDonations() {
-        return donationRepository.findAll();
+        List<Donation> donations =  donationRepository.findAll();
+        return donations;
+    }
+
+    public SubsDonation makeSubscription(SubsDonation donation, User user)
+    {
+        SubsDonation subsDonation = SubsDonation.builder()
+                .amount(donation.getAmount())
+                .message(donation.getMessage())
+                .noOfMonths(donation.getNoOfMonths())
+                .donor(user)
+                .build();
+
+        return subsDonationRepository.save(subsDonation);
+
     }
 }

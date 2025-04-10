@@ -16,7 +16,8 @@ public class VoucherController {
     private VoucherService voucherService;
 
     @PostMapping("/create")
-    public ResponseEntity<Voucher> create(@RequestBody Voucher voucher) {
+    public ResponseEntity<Voucher> create(@RequestBody Voucher voucher)
+    {
         return ResponseEntity.ok(voucherService.createVoucher(voucher));
     }
 }

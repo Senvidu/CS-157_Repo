@@ -10,5 +10,4 @@ public class HopeBridgeApplication {
         System.out.println("Application is Running");
         SpringApplication.run(HopeBridgeApplication.class, args);
     }
-
 }

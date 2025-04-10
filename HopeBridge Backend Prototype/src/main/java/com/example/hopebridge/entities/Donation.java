@@ -3,6 +3,7 @@ package com.example.hopebridge.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Builder
 @Entity
 @Getter
 @Setter

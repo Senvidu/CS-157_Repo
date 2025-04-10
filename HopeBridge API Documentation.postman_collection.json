@@ -22,15 +22,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"thisul\",\n  \"password\": \"gghjjyufh\",\n  \"role\": \"USER\"\n}"
+							"raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"password123\",\n  \"role\": \"USER\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:9090/auth/register",
+							"raw": "http://localhost:3001/auth/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "3001",
 							"path": [
 								"auth",
 								"register"
@@ -52,15 +52,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"omikariyon\"\n}"
+							"raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"password123\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/auth/login",
+							"raw": "http://localhost:3001/auth/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "3001",
 							"path": [
 								"auth",
 								"login"
@@ -71,7 +71,7 @@
 					"response": []
 				}
 			],
-			"description": "This folder’s about user authentication. It’s got the endpoints for signing up and logging in. When a new user registers, their password gets encrypted and stored securely. Logging in? It checks the credentials and hands back a JWT token so they can access the API safely"
+			"description": "This folder contains endpoints related to user authentication. It includes the endpoints for registering a new user and logging in. The registration endpoint encodes the user's password and stores their credentials securely, while the login endpoint validates user credentials and generates a JWT token for secure subsequent access to the API."
 		},
 		{
 			"name": "Biometrics",
@@ -139,7 +139,7 @@
 					"response": []
 				}
 			],
-			"description": "This folder handles all things biometrics. It’s got endpoints for registering and verifying biometric data, like fingerprint hashes. Users can save their unique biometric info and use it to authenticate later, adding an extra layer of security to the system"
+			"description": "This folder is dedicated to biometric operations. It includes endpoints that allow for the registration and verification of biometric data, such as fingerprint hashes. These endpoints ensure that users can register their unique biometric information and later authenticate themselves by verifying this data, adding an extra layer of security to the system."
 		},
 		{
 			"name": "Donations",
@@ -147,16 +147,6 @@
 				{
 					"name": "Make Donation (DonationController)",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXd1c2VyMiIsImlhdCI6MTc0MTI3Mjg0MCwiZXhwIjoxNzQxMjc2NDQwfQ.TBgQtsZpyh0rUp7ISIN6Oy8kIajUlyIoF-9f34huwhQ",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -166,19 +156,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"amount\": 50.0,\n  \"message\": \"Hope for all\"\n  \n}"
+							"raw": "{\n  \"amount\": 50.0,\n  \"message\": \"Hope for all\",\n  \"donor\": { \"id\": 1 }\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/donations/oneTime",
+							"raw": "http://localhost:3001/api/donations",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "3001",
 							"path": [
 								"api",
-								"donations",
-								"oneTime"
+								"donations"
 							]
 						},
 						"description": "Makes a donation via DonationController."
@@ -205,80 +194,9 @@
 						"description": "Lists all donations via DonationController."
 					},
 					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXd1c2VyMiIsImlhdCI6MTc0MTI3Mjg0MCwiZXhwIjoxNzQxMjc2NDQwfQ.TBgQtsZpyh0rUp7ISIN6Oy8kIajUlyIoF-9f34huwhQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/donations/check",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"donations",
-								"check"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Subscription Donation",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXd1c2VyMiIsImlhdCI6MTc0MTI3Mjg0MCwiZXhwIjoxNzQxMjc2NDQwfQ.TBgQtsZpyh0rUp7ISIN6Oy8kIajUlyIoF-9f34huwhQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"amount\": 50.0,\n  \"message\": \"Hope for all\",\n  \"noOfMonths\":3\n  \n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/donations/subscription",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"donations",
-								"subscription"
-							]
-						}
-					},
-					"response": []
 				}
 			],
-			"description": "This folder has endpoints for managing donations. Users can make donations by providing an amount and a message, which are then processed and recorded by the system. Additionally, there is an endpoint to list all donations, which aids in maintaining transparency and accountability in the donation process."
+			"description": "Within this folder, you'll find endpoints for managing donations. Users can make donations by providing an amount and a message, which are then processed and recorded by the system. Additionally, there is an endpoint to list all donations, which aids in maintaining transparency and accountability in the donation process."
 		},
 		{
 			"name": "Jobs",
@@ -335,7 +253,7 @@
 					"response": []
 				}
 			],
-			"description": "The Jobs folder Has endpoints related to job postings and retrieval. Employers can post new job listings, including details like job title, description, location, and salary. There is also an endpoint for listing all jobs, allowing users to browse available employment opportunities within the system."
+			"description": "The Jobs folder encompasses endpoints related to job postings and retrieval. Employers can post new job listings, including details like job title, description, location, and salary. There is also an endpoint for listing all jobs, allowing users to browse available employment opportunities within the system."
 		},
 		{
 			"name": "Orders",
@@ -535,7 +453,7 @@
 					"response": []
 				}
 			],
-			"description": "This folder focuses on endpoints that deal with supermarket operations. It includes an endpoint that calculates and retrieves the profit for a given supermarket based on transaction data. This information is useful for financial analysis and helps in understanding the performance of different supermarket partners."
+			"description": "The Supermarkets folder focuses on endpoints that deal with supermarket operations. It includes an endpoint that calculates and retrieves the profit for a given supermarket based on transaction data. This information is useful for financial analysis and helps in understanding the performance of different supermarket partners."
 		},
 		{
 			"name": "Users",
@@ -609,7 +527,7 @@
 					"response": []
 				}
 			],
-			"description": "This Folder has endpoints for voucher management. It provides an endpoint to create new vouchers, which are typically used to convert donations into redeemable credits. These vouchers allow users to redeem products while ensuring that donated funds are used as intended."
+			"description": "The Vouchers folder contains endpoints for voucher management. It provides an endpoint to create new vouchers, which are typically used to convert donations into redeemable credits. These vouchers allow users to redeem products while ensuring that donated funds are used as intended."
 		},
 		{
 			"name": "Base URL",
