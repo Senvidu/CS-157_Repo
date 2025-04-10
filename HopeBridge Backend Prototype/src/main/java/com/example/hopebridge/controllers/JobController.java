@@ -17,20 +17,7 @@ public class JobController {
         this.jobService = jobService;
     }
 
-    /**
-     * POST /api/jobs
-     * Example JSON:
-     * {
-     *   "title": "Software Developer",
-     *   "description": "Develop software applications",
-     *   "location": "Colombo",
-     *   "salary": 75000,
-     *   "employer": {
-     *     "id": 2
-     *   }
-     * }
-     */
-    @PostMapping
+    @PostMapping("/add-job")
     public ResponseEntity<Job> postJob(@RequestBody Job job) {
         // This automatically binds the incoming JSON to a Job entity,
         // including employer.id = 2, which JPA will recognize as a reference
@@ -39,11 +26,7 @@ public class JobController {
         return ResponseEntity.ok(savedJob);
     }
 
-    /**
-     * GET /api/jobs
-     * Returns a JSON array of all stored jobs.
-     */
-    @GetMapping
+    @GetMapping("/list-jobs")
     public ResponseEntity<List<Job>> listJobs() {
         List<Job> jobs = jobService.getAllJobs();
         return ResponseEntity.ok(jobs);
