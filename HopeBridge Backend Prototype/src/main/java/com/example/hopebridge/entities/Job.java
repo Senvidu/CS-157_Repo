@@ -8,7 +8,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-//job class to add a job to the employment portal
 public class Job {
 
     @Id
@@ -20,8 +19,7 @@ public class Job {
     private Double salary;
     private String location;
 
-
     @ManyToOne
-    @JoinColumn(name = "employer_id")  // the column in "job" table referencing "user.id"
+    @JoinColumn(name = "employer_id")  // The column in the 'job' table referencing 'user.id'
     private User employer;
 }

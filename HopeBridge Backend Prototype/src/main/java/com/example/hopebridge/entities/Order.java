@@ -5,6 +5,7 @@ import lombok.*;
 
 @Entity
 @Getter
+@Builder
 @Setter
 @NoArgsConstructor
 @Table(name = "orders")
@@ -24,4 +25,36 @@ public class Order {
     private Product product;
 
     private boolean usedVoucher;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public boolean isUsedVoucher() {
+        return usedVoucher;
+    }
+
+    public void setUsedVoucher(boolean usedVoucher) {
+        this.usedVoucher = usedVoucher;
+    }
 }
