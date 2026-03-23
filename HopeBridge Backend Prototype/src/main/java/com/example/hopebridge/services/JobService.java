@@ -3,7 +3,6 @@ package com.example.hopebridge.services;
 import com.example.hopebridge.entities.Job;
 import com.example.hopebridge.repos.JobRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

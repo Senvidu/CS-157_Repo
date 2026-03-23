@@ -14,20 +14,18 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-// Constructor-based dependency injection
+
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts() {
-     // Fetching all products from the service layer
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/products/eligible")
     public ResponseEntity<List<Product>> getEligibleProducts() {
-    // Fetching only eligible products
         return ResponseEntity.ok(productService.getEligibleProducts());
     }
 
@@ -36,11 +34,9 @@ public class ProductController {
     {
         try
         {
-        // Ensure validation for addProductRequest before passing it to service
             productService.addProduct(addProductRequest);
             return ResponseEntity.ok("The product "+addProductRequest.getName()+" was Successfully added!!");
         } catch (Exception e) {
-        // Avoid throwing generic RuntimeException, instead return a proper ResponseEntity
             throw new RuntimeException(e);
         }
     }

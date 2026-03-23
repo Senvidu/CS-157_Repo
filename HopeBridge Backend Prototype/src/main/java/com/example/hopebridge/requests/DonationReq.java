@@ -1,15 +1,12 @@
 package com.example.hopebridge.requests;
 
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class DonationReq
-{
-
+public class DonationReq {
     private Double amount;
     private String message;
 
+    public DonationReq() {}
+    public Double getAmount() { return amount; }
+    public void setAmount(Double amount) { this.amount = amount; }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 }

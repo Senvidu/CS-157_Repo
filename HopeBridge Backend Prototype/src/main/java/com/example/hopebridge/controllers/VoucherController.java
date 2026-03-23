@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//Provides an endpoint to create new vouchers
 @RestController
 @RequestMapping("/api/vouchers")
 public class VoucherController {
@@ -16,8 +15,7 @@ public class VoucherController {
     private VoucherService voucherService;
 
     @PostMapping("/create")
-    public ResponseEntity<Voucher> create(@RequestBody Voucher voucher)
-    {
+    public ResponseEntity<Voucher> create(@RequestBody Voucher voucher) {
         return ResponseEntity.ok(voucherService.createVoucher(voucher));
     }
 }
